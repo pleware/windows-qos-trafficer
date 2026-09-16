@@ -85,6 +85,7 @@
 #define IDC_OPT_CONFIG_DIR_BROWSE    3022
 #define IDC_OPT_SNAPSHOT_DIR         3023
 #define IDC_OPT_SNAPSHOT_DIR_BROWSE  3024
+#define IDC_OPT_FAIR_SHARE           3025
 
 // Options dialog - unique IDs
 #define IDC_OPT_GRP_GLOBAL_LIMITS   3100

@@ -526,6 +526,7 @@ const char * const lang_cli_en[_STR_COUNT] = {
     /*GUI_OPT_LOC_LANG_EN*/ "",
     /*GUI_OPT_LOC_LANG_HU*/ "",
     /*GUI_OPT_LOC_LANG_UNK*/ "",
+    /*GUI_RC_OPT_CHK_FAIR_SHARE*/ "",
 };
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -1074,6 +1075,7 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     /*GUI_OPT_LOC_LANG_EN*/ L"English",
     /*GUI_OPT_LOC_LANG_HU*/ L"Hungarian",
     /*GUI_OPT_LOC_LANG_UNK*/ L"Unknown",
+    /*GUI_RC_OPT_CHK_FAIR_SHARE*/ L"Fair-share QoS",
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1594,6 +1596,7 @@ const char * const lang_cli_hu[_STR_COUNT] = {
     /*GUI_OPT_LOC_LANG_EN*/ "",
     /*GUI_OPT_LOC_LANG_HU*/ "",
     /*GUI_OPT_LOC_LANG_UNK*/ "",
+    /*GUI_RC_OPT_CHK_FAIR_SHARE*/ "",
 };
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -2146,6 +2149,7 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     /*GUI_OPT_LOC_LANG_EN*/ L"Angol",
     /*GUI_OPT_LOC_LANG_HU*/ L"Magyar",
     /*GUI_OPT_LOC_LANG_UNK*/ L"Ismeretlen",
+    /*GUI_RC_OPT_CHK_FAIR_SHARE*/ L"Fair-share QoS",
 };
 
 // ═══════════════════════════════════════════════════════════════════════════

@@ -423,6 +423,11 @@ void StopShaper(void) {
     shaper_destroy(g_app.shaper);
     g_app.shaper = NULL;
 
+    if (g_app.qos) {
+        qos_fair_destroy(g_app.qos);
+        g_app.qos = NULL;
+    }
+
     // Stop the WinDivert service entirely
     stop_windivert();
 }
@@ -1567,6 +1572,9 @@ void Settings_Save(void) {
     WritePrivateProfileStringW(S, L"MinimizeToTray",
                                g_app.minimize_to_tray ? L"1" : L"0", auth_path);
 
+    WritePrivateProfileStringW(S, L"FairShare",
+                               g_app.options.qos_fair_share ? L"1" : L"0", auth_path);
+
     swprintf(buf, 512, L"%d", (int)g_app.current_unit);
     WritePrivateProfileStringW(S, L"DisplayUnit", buf, auth_path);
 
@@ -1749,6 +1757,9 @@ void Settings_Load(void) {
     // UI preferences
     GetPrivateProfileStringW(S, L"MinimizeToTray", L"1", buf, 2, path);
     g_app.minimize_to_tray = (buf[0] != L'0');
+
+    GetPrivateProfileStringW(S, L"FairShare", L"0", buf, 2, path);
+    g_app.options.qos_fair_share = (buf[0] == L'1');
 
     GetPrivateProfileStringW(S, L"DisplayUnit", L"-1", buf, 4, path);
     {
@@ -2558,6 +2569,15 @@ void onTimer(HWND hWnd, WPARAM wParam) {
         UpdateProcessRatesFromStats();
         UpdateStats();
         if (!g_app.pause_refresh) UpdateProcessList();
+
+        // Fair-share QoS: sync the controller to the setting and run one tick.
+        if (g_app.options.qos_fair_share) {
+            if (!g_app.qos) g_app.qos = qos_fair_create();
+            if (g_app.qos) qos_fair_tick(g_app.qos, g_app.shaper, true);
+        } else if (g_app.qos) {
+            qos_fair_destroy(g_app.qos);
+            g_app.qos = NULL;
+        }
     } else if (wParam == TIMER_PROCESS_REFRESH) {
         RefreshProcessList();
         if (g_app.shaper && shaper_is_running(g_app.shaper)) {

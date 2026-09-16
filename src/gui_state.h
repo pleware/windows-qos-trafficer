@@ -6,6 +6,7 @@
 #include "gui_types.h"
 #include "schedule.h"
 #include "shaper_core.h"
+#include "qos_fair.h"
 #include <shellapi.h>
 
 // Forward declaration for ProcessEntry
@@ -23,6 +24,9 @@ typedef struct AppState {
 
     // Core shaper
     ShaperInstance *shaper;
+
+    // Fair-share QoS controller (owned while running)
+    QosFairController *qos;
 
     // Process tracking
     ProcessEntry *processes;
@@ -64,6 +68,7 @@ typedef struct AppState {
         wchar_t selected_nics[256];
         bool save_settings;
         bool save_sticky_settings;
+        bool qos_fair_share;
         wchar_t config_dir[MAX_PATH];
         wchar_t snapshot_dir[MAX_PATH];
     } options;

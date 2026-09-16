@@ -310,3 +310,4 @@
 "Angol",
 "Magyar",
 "Ismeretlen",
+"Fair-share QoS",

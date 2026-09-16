@@ -105,6 +105,7 @@ void RefreshOptionsDlgStrings(HWND hDlg) {
     SetDlgItemTextW(hDlg, IDC_OPT_MINIMIZE_TRAY, T(GUI_RC_OPT_CHK_MINIMIZE_TRAY));
     SetDlgItemTextW(hDlg, IDC_OPT_SAVE_SETTINGS, T(GUI_RC_OPT_CHK_SAVE_SETTINGS));
     SetDlgItemTextW(hDlg, IDC_OPT_SAVE_STICKY_SETTINGS, T(GUI_RC_OPT_CHK_SAVE_STICKY));
+    SetDlgItemTextW(hDlg, IDC_OPT_FAIR_SHARE, T(GUI_RC_OPT_CHK_FAIR_SHARE));
     SetDlgItemTextW(hDlg, IDC_OPT_GRP_FILE_PATHS, T(GUI_RC_OPT_GRP_FILE_PATHS));
     SetDlgItemTextW(hDlg, IDC_OPT_LBL_CONFIG_FOLDER, T(GUI_RC_OPT_LBL_CONFIG_FOLDER));
     SetDlgItemTextW(hDlg, IDC_OPT_LBL_CONFIG_HINT, T(GUI_RC_OPT_LBL_CONFIG_HINT));
@@ -284,6 +285,10 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
         // Save sticky settings to config file
         CheckDlgButton(hDlg, IDC_OPT_SAVE_STICKY_SETTINGS,
                       g_app.options.save_sticky_settings ? BST_CHECKED : BST_UNCHECKED);
+
+        // Fair-share QoS
+        CheckDlgButton(hDlg, IDC_OPT_FAIR_SHARE,
+                      g_app.options.qos_fair_share ? BST_CHECKED : BST_UNCHECKED);
 
         // File path fields
         SetDlgItemTextW(hDlg, IDC_OPT_CONFIG_DIR,   g_app.options.config_dir);
@@ -527,6 +532,8 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
             // Remove StickyProcesses part from config if unset
             g_app.options.save_sticky_settings =
                 IsDlgButtonChecked(hDlg, IDC_OPT_SAVE_STICKY_SETTINGS) == BST_CHECKED;
+            g_app.options.qos_fair_share =
+                IsDlgButtonChecked(hDlg, IDC_OPT_FAIR_SHARE) == BST_CHECKED;
             Sticky_Save();
 
             g_app.options.save_settings =

@@ -306,3 +306,4 @@
 "English",
 "Hungarian",
 "Unknown",
+"Fair-share QoS",

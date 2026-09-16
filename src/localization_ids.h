@@ -540,6 +540,7 @@ typedef enum {
     GUI_OPT_LOC_LANG_EN,
     GUI_OPT_LOC_LANG_HU,
     GUI_OPT_LOC_LANG_UNK,
+    GUI_RC_OPT_CHK_FAIR_SHARE,
 
     // ----------------------------------------------------------------
     // Sentinel
