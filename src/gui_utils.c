@@ -2651,6 +2651,15 @@ void RearmScheduleTimer(HWND hWnd) {
 // ---------------------------------------------------------------------------
 // Command handlers (delegates)
 // ---------------------------------------------------------------------------
+
+// Reflect the shaper state on the toolbar buttons (Start/Stop/Reload).
+static void UpdateShaperButtons(HWND hWnd) {
+    bool running = (g_app.shaper != NULL && shaper_is_running(g_app.shaper));
+    EnableWindow(GetDlgItem(hWnd, IDC_START_BTN), !running);
+    EnableWindow(GetDlgItem(hWnd, IDC_STOP_BTN), running);
+    EnableWindow(GetDlgItem(hWnd, IDC_RELOAD_BTN), running);
+}
+
 BOOL onCommand(HWND hWnd, WPARAM wParam, LPARAM lParam) {
     int id = LOWORD(wParam);
 
@@ -2735,18 +2744,14 @@ BOOL onCommand(HWND hWnd, WPARAM wParam, LPARAM lParam) {
     switch (id) {
     case IDC_START_BTN:
         if (!g_app.shaper && StartShaper()) {
-            EnableWindow(GetDlgItem(hWnd, IDC_START_BTN), FALSE);
-            EnableWindow(GetDlgItem(hWnd, IDC_STOP_BTN), TRUE);
-            EnableWindow(GetDlgItem(hWnd, IDC_RELOAD_BTN), TRUE);
+            UpdateShaperButtons(hWnd);
             SendMessage(g_app.hStatusBar, SB_SETTEXT, 0, (LPARAM)T(GUI_STATUS_RUNNING));
         }
         return 0;
 
     case IDC_STOP_BTN:
         StopShaper();
-        EnableWindow(GetDlgItem(hWnd, IDC_START_BTN), TRUE);
-        EnableWindow(GetDlgItem(hWnd, IDC_STOP_BTN), FALSE);
-        EnableWindow(GetDlgItem(hWnd, IDC_RELOAD_BTN), FALSE);
+        UpdateShaperButtons(hWnd);
         SendMessage(g_app.hStatusBar, SB_SETTEXT, 0, (LPARAM)T(GUI_STATUS_STOPPED));
         return 0;
 
@@ -2820,18 +2825,14 @@ BOOL onCommand(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 
     case ID_TRAY_START:
         if (!g_app.shaper && StartShaper()) {
-            EnableWindow(GetDlgItem(hWnd, IDC_START_BTN), FALSE);
-            EnableWindow(GetDlgItem(hWnd, IDC_STOP_BTN), TRUE);
-            EnableWindow(GetDlgItem(hWnd, IDC_RELOAD_BTN), TRUE);
+            UpdateShaperButtons(hWnd);
             SendMessage(g_app.hStatusBar, SB_SETTEXT, 0, (LPARAM)T(GUI_STATUS_RUNNING));
         }
         return 0;
 
     case ID_TRAY_STOP:
         StopShaper();
-        EnableWindow(GetDlgItem(hWnd, IDC_START_BTN), TRUE);
-        EnableWindow(GetDlgItem(hWnd, IDC_STOP_BTN), FALSE);
-        EnableWindow(GetDlgItem(hWnd, IDC_RELOAD_BTN), FALSE);
+        UpdateShaperButtons(hWnd);
         SendMessage(g_app.hStatusBar, SB_SETTEXT, 0, (LPARAM)T(GUI_STATUS_STOPPED));
         return 0;
 
@@ -2960,7 +2961,11 @@ LRESULT onCreate(HWND hWnd) {
     // the user having to click Start.
     if (g_app.options.auto_start &&
         (g_app.options.all_nics || g_app.options.selected_nics[0] != L'\0')) {
-        StartShaper();
+        if (StartShaper()) {
+            UpdateShaperButtons(hWnd);
+            if (g_app.hStatusBar)
+                SendMessage(g_app.hStatusBar, SB_SETTEXT, 0, (LPARAM)T(GUI_STATUS_RUNNING));
+        }
     }
 
     if (!init_success) {
