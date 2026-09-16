@@ -37,7 +37,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "Create a &desktop shortcut"; GroupDescription: "Additional shortcuts:"
-Name: "autostart"; Description: "Start {#AppName} with Windows"; GroupDescription: "Startup:"
+Name: "autostart"; Description: "Start {#AppName} with Windows"; GroupDescription: "Startup:"; Flags: checkedonce
 
 [Files]
 ; Desktop app (GUI, x64)
