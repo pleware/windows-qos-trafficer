@@ -37,6 +37,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "Create a &desktop shortcut"; GroupDescription: "Additional shortcuts:"
+Name: "autostart"; Description: "Start {#AppName} with Windows"; GroupDescription: "Startup:"
 
 [Files]
 ; Desktop app (GUI, x64)
@@ -52,4 +53,10 @@ Name: "{group}\{#AppName}"; Filename: "{app}\{#AppExeName}"
 Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExeName}"; Tasks: desktopicon
 
 [Run]
+; Register a logon task that runs the app elevated (WinDivert needs admin)
+; without a UAC prompt at every boot.
+Filename: "schtasks.exe"; Parameters: "/create /tn ""{#AppName}"" /tr ""'{app}\{#AppExeName}'"" /sc onlogon /rl highest /f"; Tasks: autostart; Flags: runhidden
 Filename: "{app}\{#AppExeName}"; Description: "Launch {#AppName}"; Flags: nowait postinstall skipifsilent
+
+[UninstallRun]
+Filename: "schtasks.exe"; Parameters: "/delete /tn ""{#AppName}"" /f"; Flags: runhidden
