@@ -1,6 +1,11 @@
-# BandwidthShaper
+# Windows QoS Trafficer
 
-[![Build Status](https://github.com/niltwill/BandwidthShaper/actions/workflows/main.yml/badge.svg)](https://github.com/niltwill/BandwidthShaper/actions)
+A small, portable tool to limit bandwidth and enforce simple per-process QoS fairness in Windows. Available for both 32-bit and 64-bit systems.
+
+> **Attribution:** This project is derived from
+> [BandwidthShaper](https://github.com/niltwill/BandwidthShaper)
+> (Copyright (c) 2025 Thomas K., MIT License). See [NOTICE](NOTICE) and
+> [LICENSE](LICENSE) for full attribution and licensing details.
 
 ## Description
 This is a small, portable tool to limit bandwidth in Windows. Available for both 32-bit and 64-bit systems.

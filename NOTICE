@@ -1,0 +1,22 @@
+Windows QoS Trafficer
+=====================
+
+This project is derived from BandwidthShaper
+(https://github.com/niltwill/BandwidthShaper),
+Copyright (c) 2025 Thomas K., licensed under the MIT License.
+
+The original MIT license text, including the original copyright notice,
+is preserved in the LICENSE file as required by the MIT License terms.
+
+Third-party components
+----------------------
+
+WinDivert (https://reqrypt.org/windivert.html) is used for network traffic
+interception and shaping. WinDivert is Copyright (c) Basil / Reqrypt.org and
+is licensed under the GNU Lesser General Public License v3 (LGPL v3).
+WinDivert is distributed as a separate, independently replaceable component
+(dynamically linked driver + library); see the WinDivert license text at
+https://github.com/basil00/WinDivert/blob/master/LICENSE.
+
+New code and modifications in this project, Copyright (c) 2026 PWare, are
+licensed under the MIT License.
