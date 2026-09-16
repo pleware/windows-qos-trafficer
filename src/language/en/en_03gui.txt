@@ -312,6 +312,6 @@
 "Network",
 "QoS",
 "General",
-"No single program can monopolize the full bandwidth. Link capacity is auto-detected; a process using more than its fair share is capped to 70% of the link (download and upload).",
+"No single program can monopolize the full bandwidth. Link capacity is auto-detected and split equally among active programs (2 = 50% each, 3 = 33%, 4 = 25%, and so on).",
 "All interfaces",
 "Start shaping automatically",

@@ -135,7 +135,7 @@ static void print_startup_summary(const ParsedArgs *args) {
 
     // Fair-share QoS
     if (args->qos_fair_share) {
-        printf(C(CLI_QOS_ENABLED), QOS_FAIR_SHARE_PERCENT);
+        printf(C(CLI_QOS_ENABLED));
     }
 
     printf(C(CLI_QUIT_HINT));

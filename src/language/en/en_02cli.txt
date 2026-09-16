@@ -261,7 +261,7 @@
 "Display this help and exit\n",
 "  -F, --fair-share                             "
 "Auto-cap a single process hogging the link (fair-share QoS; on by default)\n",
-"Fair-share QoS: enabled (auto-detect capacity, %d%% cap per process)\n",
+"Fair-share QoS: enabled (equal share per active process)\n",
 "QoS: capping PID %u download to %.1f KB/s\n",
 "QoS: capping PID %u upload to %.1f KB/s\n",
 "QoS: released PID %u\n",

@@ -9,10 +9,10 @@
 // of observed total throughput, so no line rate needs to be configured.
 //
 // Each tick the controller snapshots per-PID traffic (via the shaper core),
-// computes per-PID throughput, and caps any single PID that consumes more
-// than QOS_FAIR_SHARE_PERCENT of the detected capacity while at least one
-// other PID is also active. A cap is released once the PID's demand stays
-// below half the fair share for QOS_RELEASE_TICKS consecutive ticks.
+// computes per-PID throughput, and caps every active PID at an equal share of
+// the detected capacity (capacity / active_count): 2 flows get 50% each,
+// 3 get ~33%, 4 get 25%, and so on. A cap is released once the PID's demand
+// stays below half its share for QOS_RELEASE_TICKS consecutive ticks.
 
 #include "shaper_core.h"
 #include "qos_math.h"

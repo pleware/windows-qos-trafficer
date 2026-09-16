@@ -289,7 +289,7 @@ const char * const lang_cli_en[_STR_COUNT] = {
     "Display this help and exit\n",
     /*CLI_HELP_FAIR_SHARE*/ "  -F, --fair-share                             "
     "Auto-cap a single process hogging the link (fair-share QoS; on by default)\n",
-    /*CLI_QOS_ENABLED*/ "Fair-share QoS: enabled (auto-detect capacity, %d%% cap per process)\n",
+    /*CLI_QOS_ENABLED*/ "Fair-share QoS: enabled (equal share per active process)\n",
     /*CLI_QOS_CAP_DL*/ "QoS: capping PID %u download to %.1f KB/s\n",
     /*CLI_QOS_CAP_UL*/ "QoS: capping PID %u upload to %.1f KB/s\n",
     /*CLI_QOS_RELEASED*/ "QoS: released PID %u\n",
@@ -1089,7 +1089,7 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     /*GUI_RC_OPT_TAB_NETWORK*/ L"Network",
     /*GUI_RC_OPT_TAB_QOS*/ L"QoS",
     /*GUI_RC_OPT_TAB_GENERAL*/ L"General",
-    /*GUI_RC_OPT_QOS_DESC*/ L"No single program can monopolize the full bandwidth. Link capacity is auto-detected; a process using more than its fair share is capped to 70% of the link (download and upload).",
+    /*GUI_RC_OPT_QOS_DESC*/ L"No single program can monopolize the full bandwidth. Link capacity is auto-detected and split equally among active programs (2 = 50% each, 3 = 33%, 4 = 25%, and so on).",
     /*GUI_RC_OPT_CHK_ALL_NICS*/ L"All interfaces",
     /*GUI_RC_OPT_CHK_AUTO_START*/ L"Start shaping automatically",
 };
@@ -1375,7 +1375,7 @@ const char * const lang_cli_hu[_STR_COUNT] = {
     "Eme súgó kiírása és kilépés\n",
     /*CLI_HELP_FAIR_SHARE*/ "  -F, --fair-share                             "
     "Fair-share QoS: egyetlen folyamat se foglalhassa le a teljes sávszélességet (alapértelmezés szerint bekapcsolva)\n",
-    /*CLI_QOS_ENABLED*/ "Fair-share QoS: engedélyezve (automatikus érzékelés, %d%% korlát folyamatonként)\n",
+    /*CLI_QOS_ENABLED*/ "Fair-share QoS: engedélyezve (egyenlő megosztás aktív folyamatonként)\n",
     /*CLI_QOS_CAP_DL*/ "QoS: %u PID letöltési korlátozása %.1f KB/s-ra\n",
     /*CLI_QOS_CAP_UL*/ "QoS: %u PID feltöltési korlátozása %.1f KB/s-ra\n",
     /*CLI_QOS_RELEASED*/ "QoS: %u PID korlátozása feloldva\n",
@@ -2179,7 +2179,7 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     /*GUI_RC_OPT_TAB_NETWORK*/ L"Hálózat",
     /*GUI_RC_OPT_TAB_QOS*/ L"QoS",
     /*GUI_RC_OPT_TAB_GENERAL*/ L"Általános",
-    /*GUI_RC_OPT_QOS_DESC*/ L"Egyetlen program sem foglalhatja le a teljes sávszélességet. A kapcsolat kapacitása automatikusan felismerésre kerül; a tisztességes részesedésnél többet fogyasztó folyamat a sáv 70%-ára korlátozódik (letöltés és feltöltés).",
+    /*GUI_RC_OPT_QOS_DESC*/ L"Egyetlen program sem foglalhatja le a teljes sávszélességet. A kapcsolat kapacitása automatikusan felismerésre kerül, és egyenlően oszlik meg az aktív programok között (2 = 50%, 3 = 33%, 4 = 25% és így tovább).",
     /*GUI_RC_OPT_CHK_ALL_NICS*/ L"Összes interfész",
     /*GUI_RC_OPT_CHK_AUTO_START*/ L"Forgalomformálás automatikus indítása",
 };
@@ -2465,7 +2465,7 @@ const char * const lang_cli_pl[_STR_COUNT] = {
     "Wyświetl tę pomoc i zakończ\n",
     /*CLI_HELP_FAIR_SHARE*/ "  -F, --fair-share                             "
     "Automatycznie ogranicz pojedynczy proces zajmujący łącze (fair-share QoS; domyślnie włączony)\n",
-    /*CLI_QOS_ENABLED*/ "Fair-share QoS: włączony (auto-detekcja przepustowości, limit %d%% na proces)\n",
+    /*CLI_QOS_ENABLED*/ "Fair-share QoS: włączony (równy podział na aktywne procesy)\n",
     /*CLI_QOS_CAP_DL*/ "QoS: ograniczam PID %u pobieranie do %.1f KB/s\n",
     /*CLI_QOS_CAP_UL*/ "QoS: ograniczam PID %u wysyłanie do %.1f KB/s\n",
     /*CLI_QOS_RELEASED*/ "QoS: zwolniono PID %u\n",
@@ -3265,7 +3265,7 @@ const wchar_t * const lang_gui_pl[_STR_COUNT] = {
     /*GUI_RC_OPT_TAB_NETWORK*/ L"Sieć",
     /*GUI_RC_OPT_TAB_QOS*/ L"QoS",
     /*GUI_RC_OPT_TAB_GENERAL*/ L"Ogólne",
-    /*GUI_RC_OPT_QOS_DESC*/ L"Żaden program nie może zmonopolizować całego pasma. Przepustowość łącza jest wykrywana automatycznie; proces zużywający ponad swój udział jest ograniczany do 70% łącza (pobieranie i wysyłanie).",
+    /*GUI_RC_OPT_QOS_DESC*/ L"Żaden program nie może zmonopolizować całego pasma. Przepustowość łącza jest wykrywana automatycznie i dzielona po równo między aktywne programy (2 = po 50%, 3 = po 33%, 4 = po 25% itd.).",
     /*GUI_RC_OPT_CHK_ALL_NICS*/ L"Wszystkie interfejsy",
     /*GUI_RC_OPT_CHK_AUTO_START*/ L"Uruchamiaj shaper automatycznie",
 };

@@ -316,6 +316,6 @@
 "Hálózat",
 "QoS",
 "Általános",
-"Egyetlen program sem foglalhatja le a teljes sávszélességet. A kapcsolat kapacitása automatikusan felismerésre kerül; a tisztességes részesedésnél többet fogyasztó folyamat a sáv 70%-ára korlátozódik (letöltés és feltöltés).",
+"Egyetlen program sem foglalhatja le a teljes sávszélességet. A kapcsolat kapacitása automatikusan felismerésre kerül, és egyenlően oszlik meg az aktív programok között (2 = 50%, 3 = 33%, 4 = 25% és így tovább).",
 "Összes interfész",
 "Forgalomformálás automatikus indítása",
