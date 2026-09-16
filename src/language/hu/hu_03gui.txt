@@ -87,7 +87,7 @@
 "A mentett NIC nem található: '%s' - ellenőrizd a Beállításokban",
 "Nincs IP",
 "A programról",
-"Windows QoS Trafficer %s\nFejlett forgalomkorlátozó\n\nKészítette: niltwill\nhttps://github.com/pleware/windows-qos-trafficer",
+"Windows QoS Trafficer %s\nFejlett forgalomkorlátozó\n\nPWare.AI\nhttps://github.com/pleware/windows-qos-trafficer\n\nKöszönet niltwill-nek az eredeti BandwidthShaperért",
 "A korlátozó fut",
 "Leállt",
 "A konfiguráció újratöltve",

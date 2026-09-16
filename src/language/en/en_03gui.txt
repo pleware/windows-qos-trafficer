@@ -87,7 +87,7 @@
 "Saved NIC not found: '%s' - check Options",
 "No IP",
 "About",
-"Windows QoS Trafficer %s\nAdvanced Traffic Shaper\n\nMade by: niltwill\nhttps://github.com/pleware/windows-qos-trafficer",
+"Windows QoS Trafficer %s\nAdvanced Traffic Shaper\n\nPWare.AI\nhttps://github.com/pleware/windows-qos-trafficer\n\nThanks to niltwill for the original BandwidthShaper",
 "Shaper running",
 "Stopped",
 "Configuration reloaded",

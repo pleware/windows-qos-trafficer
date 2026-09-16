@@ -87,7 +87,7 @@
 "Nie znaleziono zapisanego interfejsu: '%s' - sprawdź Opcje",
 "Brak IP",
 "O programie",
-"Windows QoS Trafficer %s\nZaawansowany shaper ruchu\n\nAutor: niltwill\nhttps://github.com/pleware/windows-qos-trafficer",
+"Windows QoS Trafficer %s\nZaawansowany shaper ruchu\n\nPWare.AI\nhttps://github.com/pleware/windows-qos-trafficer\n\nPodziękowania dla niltwill za oryginalny BandwidthShaper",
 "Shaper działa",
 "Zatrzymany",
 "Konfiguracja przeładowana",
