@@ -584,6 +584,11 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
         break;
     }
 
+    case WM_CLOSE:
+        // Closing the window (X / Alt+F4) behaves like OK: save settings.
+        SendMessage(hDlg, WM_COMMAND, IDOK, 0);
+        return TRUE;
+
     case WM_COMMAND:
         switch (LOWORD(wParam)) {
         case IDOK: {
@@ -648,12 +653,8 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
             g_app.options.all_nics =
                 IsDlgButtonChecked(hDlg, IDC_OPT_NIC_ALL) == BST_CHECKED;
 
-            // Settings_Save handles all cases: full save when save_settings
-            // is on, redirect-only when a custom dir is set but save_settings
-            // is off, and cleanup (DeleteFile) when neither applies.
-            Settings_Save();
-
-            // Get selected NICs
+            // Build the selected-NICs string BEFORE saving, so the current
+            // selection is persisted by the Settings_Save call below.
             HWND hList = GetDlgItem(hDlg, IDC_OPT_NIC_LIST);
             int selCount = (int)SendMessage(hList, LB_GETSELCOUNT, 0, 0);
             if (selCount > 0) {
@@ -674,6 +675,11 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
 
                 free(selItems);
             }
+
+            // Settings_Save handles all cases: full save when save_settings
+            // is on, redirect-only when a custom dir is set but save_settings
+            // is off, and cleanup (DeleteFile) when neither applies.
+            Settings_Save();
 
             // Apply changes to running shaper if it's running
             if (g_app.shaper && shaper_is_running(g_app.shaper)) {
