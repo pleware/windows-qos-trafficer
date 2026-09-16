@@ -11,10 +11,9 @@
 #define AppVersion "1.0.0"
 #define AppExeName "WindowsQoSTrafficer.exe"
 #define AppPublisher "PWare"
-#define AppId "{{B4E7D2A9-3C5F-4A18-9E6D-1F2B8C7A4E60}"
 
 [Setup]
-AppId={{#AppId}
+AppId={{B4E7D2A9-3C5F-4A18-9E6D-1F2B8C7A4E60}
 AppName={#AppName}
 AppVersion={#AppVersion}
 AppPublisher={#AppPublisher}
