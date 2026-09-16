@@ -7,6 +7,10 @@ A small, portable tool to limit bandwidth and enforce simple per-process QoS fai
 > (Copyright (c) 2025 Thomas K., MIT License). See [NOTICE](NOTICE) and
 > [LICENSE](LICENSE) for full attribution and licensing details.
 
+## Download
+
+Pre-built installer (x64): **[Windows QoS Trafficer 1.0.0](https://github.com/pleware/windows-qos-trafficer/releases/tag/v1.0.0)** — bundles the app and the signed WinDivert driver; run as Administrator.
+
 ## Description
 This is a small, portable tool to limit bandwidth in Windows. Available for both 32-bit and 64-bit systems.
 
@@ -178,7 +182,7 @@ There has to be a --rule, --stop-at, --process, or --pid before the --schedule. 
 
 ## Fair-share QoS (anti-hog)
 
-The `-F` / `--fair-share` flag adds a simple QoS controller that stops any **single process** from monopolising your upload or download bandwidth — no per-process rules required.
+Fair-share QoS stops any **single process** from monopolising your upload or download bandwidth — no per-process rules required. It is available in the desktop app (**Options → "Fair-share QoS"**) and in the CLI via the `-F` / `--fair-share` flag.
 
 ```
 # Keep any one process from taking more than ~70% of the link, leaving
