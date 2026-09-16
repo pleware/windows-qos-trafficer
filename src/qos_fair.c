@@ -11,10 +11,7 @@
 #include "qos_fair.h"
 #include "localization_api.h"
 
-#define QOS_CAPACITY_DECAY 0.99    // per-tick decay of the capacity estimate
-#define QOS_RELEASE_RATIO  0.50    // release when rate < cap * this ratio
 #define QOS_RERATE_RATIO   0.10    // re-apply cap when fair share drifts >10%
-#define QOS_MIN_CAPACITY   16384.0 // bytes/sec; below this the link is "idle"
 #define QOS_PRUNE_TICKS    10      // drop state for PIDs unseen this many ticks
 
 typedef struct QosPidState {
@@ -139,15 +136,11 @@ void qos_fair_tick(QosFairController *qos, ShaperInstance *shaper, bool quiet) {
     }
 
     // ---- Capacity: decaying high-water mark ----------------------------
-    double dl_cap = qos->dl_capacity * QOS_CAPACITY_DECAY;
-    qos->dl_capacity = (dl_cap > total_dl) ? dl_cap : total_dl;
-    double ul_cap = qos->ul_capacity * QOS_CAPACITY_DECAY;
-    qos->ul_capacity = (ul_cap > total_ul) ? ul_cap : total_ul;
+    qos->dl_capacity = qos_capacity_update(qos->dl_capacity, total_dl);
+    qos->ul_capacity = qos_capacity_update(qos->ul_capacity, total_ul);
 
-    double fair_dl = qos->dl_capacity * (QOS_FAIR_SHARE_PERCENT / 100.0);
-    double fair_ul = qos->ul_capacity * (QOS_FAIR_SHARE_PERCENT / 100.0);
-    double floor_dl = qos->dl_capacity * (QOS_MIN_ACTIVE_SHARE / 100.0);
-    double floor_ul = qos->ul_capacity * (QOS_MIN_ACTIVE_SHARE / 100.0);
+    double floor_dl = qos_active_floor(qos->dl_capacity);
+    double floor_ul = qos_active_floor(qos->ul_capacity);
 
     // ---- Find the top hog per direction and count active PIDs ----------
     DWORD top_dl_pid = 0, top_ul_pid = 0;
@@ -166,47 +159,21 @@ void qos_fair_tick(QosFairController *qos, ShaperInstance *shaper, bool quiet) {
         }
     }
 
-    bool dl_enforced = qos->dl_capacity >= QOS_MIN_CAPACITY;
-    bool ul_enforced = qos->ul_capacity >= QOS_MIN_CAPACITY;
+    bool dl_enforced = qos_enforced(qos->dl_capacity);
+    bool ul_enforced = qos_enforced(qos->ul_capacity);
 
     // ---- Compute desired cap state per PID -----------------------------
     HASH_ITER(hh, qos->pids, st, tmp) {
-        st->desired_dl = 0.0;
-        st->desired_ul = 0.0;
-
-        if (dl_enforced) {
-            if (st->applied_dl > 0.0) {
-                if (st->cur_dl < fair_dl * QOS_RELEASE_RATIO) {
-                    st->dl_release++;
-                    st->desired_dl = (st->dl_release >= QOS_RELEASE_TICKS)
-                                         ? 0.0 : st->applied_dl;
-                } else {
-                    st->dl_release = 0;
-                    st->desired_dl = fair_dl;
-                }
-            }
-            if (active_dl >= 2 && st->pid == top_dl_pid && top_dl_rate > fair_dl) {
-                st->desired_dl = fair_dl;
-                st->dl_release = 0;
-            }
-        }
-
-        if (ul_enforced) {
-            if (st->applied_ul > 0.0) {
-                if (st->cur_ul < fair_ul * QOS_RELEASE_RATIO) {
-                    st->ul_release++;
-                    st->desired_ul = (st->ul_release >= QOS_RELEASE_TICKS)
-                                         ? 0.0 : st->applied_ul;
-                } else {
-                    st->ul_release = 0;
-                    st->desired_ul = fair_ul;
-                }
-            }
-            if (active_ul >= 2 && st->pid == top_ul_pid && top_ul_rate > fair_ul) {
-                st->desired_ul = fair_ul;
-                st->ul_release = 0;
-            }
-        }
+        st->desired_dl = dl_enforced
+            ? qos_decide_cap(qos->dl_capacity, st->cur_dl, top_dl_rate,
+                             st->pid == top_dl_pid, active_dl,
+                             st->applied_dl, &st->dl_release)
+            : 0.0;
+        st->desired_ul = ul_enforced
+            ? qos_decide_cap(qos->ul_capacity, st->cur_ul, top_ul_rate,
+                             st->pid == top_ul_pid, active_ul,
+                             st->applied_ul, &st->ul_release)
+            : 0.0;
     }
 
     // ---- Apply transitions (add / remove / re-rate) --------------------

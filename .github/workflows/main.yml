@@ -1,4 +1,4 @@
-name: Build BandwidthShaper
+name: Build Windows QoS Trafficer
 
 on:
   push:
@@ -43,6 +43,11 @@ jobs:
       shell: cmd
       run: call 0_compile-gui.bat
 
+    - name: Run unit tests
+      working-directory: src
+      shell: cmd
+      run: call 0_run_tests.bat
+
     - name: Clean intermediate files
       working-directory: src
       shell: cmd
@@ -51,11 +56,11 @@ jobs:
     - name: Upload CLI artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: BandwidthShaper-CLI
+        name: WindowsQoSTrafficer-CLI
         path: src/release/CLI/
 
     - name: Upload GUI artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: BandwidthShaper-GUI
+        name: WindowsQoSTrafficer-GUI
         path: src/release/GUI/

@@ -15,11 +15,9 @@
 // below half the fair share for QOS_RELEASE_TICKS consecutive ticks.
 
 #include "shaper_core.h"
+#include "qos_math.h"
 
-#define QOS_FAIR_SHARE_PERCENT 70    // a hog is capped at this % of capacity
 #define QOS_TICK_INTERVAL_MS   1000  // measurement period
-#define QOS_RELEASE_TICKS      3     // quiet ticks before releasing a cap
-#define QOS_MIN_ACTIVE_SHARE   2     // a PID is "active" above this % of capacity
 
 typedef struct QosFairController QosFairController;
 
