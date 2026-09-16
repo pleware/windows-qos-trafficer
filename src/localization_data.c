@@ -861,7 +861,7 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     /*GUI_WARN_MISSING_NIC*/ L"Saved NIC not found: '%s' - check Options",
     /*GUI_OPT_NIC_NO_IP*/ L"No IP",
     /*GUI_CAP_ABOUT*/ L"About",
-    /*GUI_CAP_MSG*/ L"BandwidthShaper %s\nAdvanced Traffic Shaper\n\nMade by: niltwill\nhttps://github.com/niltwill/BandwidthShaper",
+    /*GUI_CAP_MSG*/ L"Windows QoS Trafficer %s\nAdvanced Traffic Shaper\n\nMade by: niltwill\nhttps://github.com/pleware/windows-qos-trafficer",
     /*GUI_STATUS_RUNNING*/ L"Shaper running",
     /*GUI_STATUS_STOPPED*/ L"Stopped",
     /*GUI_STATUS_RELOADED*/ L"Configuration reloaded",
@@ -916,10 +916,10 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     L"The list is disabled while the shaper is running.",
     /*GUI_TIP_MINIMIZE_TRAY*/ L"When minimized, hide the window and show only a system tray icon. "
     L"Double-click the tray icon to restore.",
-    /*GUI_TIP_SAVE_SETTINGS*/ L"Save all current Options values to BandwidthShaper.cfg\n"
+    /*GUI_TIP_SAVE_SETTINGS*/ L"Save all current Options values to WindowsQoSTrafficer.cfg\n"
     L"when the program exits, and reload them on next launch.",
     /*GUI_TIP_SAVE_STICKY*/ L"Save the sticky process list (pinned processes and their limits)\n"
-    L"to BandwidthShaper.cfg on exit, and restore them on next launch.\n"
+    L"to WindowsQoSTrafficer.cfg on exit, and restore them on next launch.\n"
     L"Does require 'Remember settings on exit' to also be checked.",
     /*GUI_TIP_CONFIG_DIR*/ L"Save the config file to this location when the program exits,\n"
     L"and reload them using that path next launch.",
@@ -927,7 +927,7 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     L"instead of the same directory as the EXE file itself.",
     /*GUI_TIP_LANGUAGE*/ L"Change the language of the program.",
     /*GUI_ERR_RELOAD_FAIL*/ L"Failed to reload config: %s",
-    /*GUI_STATS_FOLDER_CONF*/ L"Select folder for the config file (BandwidthShaper.cfg):",
+    /*GUI_STATS_FOLDER_CONF*/ L"Select folder for the config file (WindowsQoSTrafficer.cfg):",
     /*GUI_STATS_FOLDER_PROMPT*/ L"Select folder for CSV snapshot exports:",
     /*GUI_STATS_DATA_IN*/ L"Data In",
     /*GUI_STATS_DATA_OUT*/ L"Data Out",
@@ -968,7 +968,7 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     L"Please select at least one day, or uncheck the Day of week option.",
     /*GUI_STATS_SAVE_ERROR*/ L"Failed to create the CSV file.\n"
     L"Make sure the application has write access to its directory.",
-    /*GUI_STATS_SAVE_HEADER*/ L"BandwidthShaper Statistics Export\n",
+    /*GUI_STATS_SAVE_HEADER*/ L"Windows QoS Trafficer Statistics Export\n",
     /*GUI_STATS_SAVE_GENER*/ L"Generated,%04u-%02u-%02u %02u:%02u:%02u\n\n",
     /*GUI_STATS_SAVE_PER_TRAF*/ L"Per-Process Traffic\n",
     /*GUI_STATS_SAVE_P_DESC*/ L"Process,Description,Data In (MB),Data Out (MB),Total (MB),Quota In (MB),Quota Out (MB),Quota Exhausted\n",
@@ -1063,7 +1063,7 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     /*GUI_RC_SPECIFY_CAP*/ L"Specify Process",
     /*GUI_RC_SPECIFY_PROMPT*/ L"Process name (without .exe):",
     /*GUI_RC_BTN_ADD*/ L"Add",
-    /*GUI_RC_STATS_CAP*/ L"Statistics - BandwidthShaper",
+    /*GUI_RC_STATS_CAP*/ L"Statistics - Windows QoS Trafficer",
     /*GUI_RC_STATS_LBL_DL_HISTORY*/ L"Download History",
     /*GUI_RC_STATS_LBL_UL_HISTORY*/ L"Upload History",
     /*GUI_RC_STATS_LBL_PROC_TRAFFIC*/ L"Per-Process Traffic",
@@ -1929,7 +1929,7 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     /*GUI_WARN_MISSING_NIC*/ L"A mentett NIC nem található: '%s' - ellenőrizd a Beállításokban",
     /*GUI_OPT_NIC_NO_IP*/ L"Nincs IP",
     /*GUI_CAP_ABOUT*/ L"A programról",
-    /*GUI_CAP_MSG*/ L"BandwidthShaper %s\nFejlett forgalomkorlátozó\n\nKészítette: niltwill\nhttps://github.com/niltwill/BandwidthShaper",
+    /*GUI_CAP_MSG*/ L"Windows QoS Trafficer %s\nFejlett forgalomkorlátozó\n\nKészítette: niltwill\nhttps://github.com/pleware/windows-qos-trafficer",
     /*GUI_STATUS_RUNNING*/ L"A korlátozó fut",
     /*GUI_STATUS_STOPPED*/ L"Leállt",
     /*GUI_STATUS_RELOADED*/ L"A konfiguráció újratöltve",
@@ -1987,10 +1987,10 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     L" A lista hozzáférhetetlen míg a korlátozó fut.",
     /*GUI_TIP_MINIMIZE_TRAY*/ L"A lekicsinyítéskor elrejti az ablakot az értesítési területre. "
     L"Kattints kétszer a tálcaikonra a helyreállításhoz.",
-    /*GUI_TIP_SAVE_SETTINGS*/ L"Elment minden jelenlegi beállítást a BandwidthShaper.cfg fájlba\n"
+    /*GUI_TIP_SAVE_SETTINGS*/ L"Elment minden jelenlegi beállítást a WindowsQoSTrafficer.cfg fájlba\n"
     L"mikor a program kilép, és újratölti ezt a következő indításnál.",
     /*GUI_TIP_SAVE_STICKY*/ L"Elmenti a ragadós folyamat listát (a rögzített folyamatokat\n"
-    L"és korlátjaikat) a BandwidthShaper.cfg fájlba kilépésnél, és helyreállítja a"
+    L"és korlátjaikat) a WindowsQoSTrafficer.cfg fájlba kilépésnél, és helyreállítja a"
     L"következő indításnál.\n"
     L"Ez igényli az 'Emlékezzen a beállításokra kilépéskor' opció bejelölését is.",
     /*GUI_TIP_CONFIG_DIR*/ L"A konfig fájlt erre a helyre mentse mikor a program kilép,\n"
@@ -1999,7 +1999,7 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     L"az EXE fájllal megegyező könyvtár helyett.",
     /*GUI_TIP_LANGUAGE*/ L"Változtasd meg a program nyelvét.",
     /*GUI_ERR_RELOAD_FAIL*/ L"A konfig újratöltése sikertelen: %s",
-    /*GUI_STATS_FOLDER_CONF*/ L"Válassz könyvtárat a konfig fájlnak (BandwidthShaper.cfg):",
+    /*GUI_STATS_FOLDER_CONF*/ L"Válassz könyvtárat a konfig fájlnak (WindowsQoSTrafficer.cfg):",
     /*GUI_STATS_FOLDER_PROMPT*/ L"Válassz könyvtárat a CSV pillanatkép mentéséhez:",
     /*GUI_STATS_DATA_IN*/ L"Bemenő Adat",
     /*GUI_STATS_DATA_OUT*/ L"Kimenő Adat",
@@ -2040,7 +2040,7 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     L"Kérlek válassz ki legalább egy napot, vagy mellőzd a Hét napja opciót.",
     /*GUI_STATS_SAVE_ERROR*/ L"Nem sikerült a CSV fájl létrehozása.\n"
     L"Győződj meg róla, hogy az alkalmazásnak van írási jogosultsága a könyvtárhoz.",
-    /*GUI_STATS_SAVE_HEADER*/ L"BandwidthShaper Statisztika\n",
+    /*GUI_STATS_SAVE_HEADER*/ L"Windows QoS Trafficer Statisztika\n",
     /*GUI_STATS_SAVE_GENER*/ L"Generálva,%04u-%02u-%02u %02u:%02u:%02u\n\n",
     /*GUI_STATS_SAVE_PER_TRAF*/ L"Folyamatszintű Forgalom\n",
     /*GUI_STATS_SAVE_P_DESC*/ L"Folyamat,Leírás,Bejövő Adat (MB),Kimenő Adat (MB),Összesen (MB),Bejövő Kvóta (MB),Kimenő Kvóta (MB),Kimerített Kvóta\n",
@@ -2135,7 +2135,7 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     /*GUI_RC_SPECIFY_CAP*/ L"Folyamat meghatározása",
     /*GUI_RC_SPECIFY_PROMPT*/ L"Folyamatnév (az .exe nélkül):",
     /*GUI_RC_BTN_ADD*/ L"Hozzáadás",
-    /*GUI_RC_STATS_CAP*/ L"Statisztika - BandwidthShaper",
+    /*GUI_RC_STATS_CAP*/ L"Statisztika - Windows QoS Trafficer",
     /*GUI_RC_STATS_LBL_DL_HISTORY*/ L"Letöltési előzmény",
     /*GUI_RC_STATS_LBL_UL_HISTORY*/ L"Feltöltési előzmény",
     /*GUI_RC_STATS_LBL_PROC_TRAFFIC*/ L"Folyamatszintű forgalom",

@@ -180,7 +180,7 @@ END
 // --------------------------------------------------------------------
 IDD_STATS_DIALOG DIALOGEX 0, 0, 500, 500
 STYLE DS_SETFONT | WS_OVERLAPPEDWINDOW
-CAPTION "Statistics - BandwidthShaper"
+CAPTION "Statistics - Windows QoS Trafficer"
 FONT 9, "Segoe UI"
 BEGIN
     // Download chart

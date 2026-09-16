@@ -87,7 +87,7 @@
 "A mentett NIC nem található: '%s' - ellenőrizd a Beállításokban",
 "Nincs IP",
 "A programról",
-"BandwidthShaper %s\nFejlett forgalomkorlátozó\n\nKészítette: niltwill\nhttps://github.com/niltwill/BandwidthShaper",
+"Windows QoS Trafficer %s\nFejlett forgalomkorlátozó\n\nKészítette: niltwill\nhttps://github.com/pleware/windows-qos-trafficer",
 "A korlátozó fut",
 "Leállt",
 "A konfiguráció újratöltve",
@@ -146,10 +146,10 @@
 " A lista hozzáférhetetlen míg a korlátozó fut.",
 "A lekicsinyítéskor elrejti az ablakot az értesítési területre. "
 "Kattints kétszer a tálcaikonra a helyreállításhoz.",
-"Elment minden jelenlegi beállítást a BandwidthShaper.cfg fájlba\n"
+"Elment minden jelenlegi beállítást a WindowsQoSTrafficer.cfg fájlba\n"
 "mikor a program kilép, és újratölti ezt a következő indításnál.",
 "Elmenti a ragadós folyamat listát (a rögzített folyamatokat\n"
-"és korlátjaikat) a BandwidthShaper.cfg fájlba kilépésnél, és helyreállítja a"
+"és korlátjaikat) a WindowsQoSTrafficer.cfg fájlba kilépésnél, és helyreállítja a"
 "következő indításnál.\n"
 "Ez igényli az 'Emlékezzen a beállításokra kilépéskor' opció bejelölését is.",
 "A konfig fájlt erre a helyre mentse mikor a program kilép,\n"
@@ -158,7 +158,7 @@
 "az EXE fájllal megegyező könyvtár helyett.",
 "Változtasd meg a program nyelvét.",
 "A konfig újratöltése sikertelen: %s",
-"Válassz könyvtárat a konfig fájlnak (BandwidthShaper.cfg):",
+"Válassz könyvtárat a konfig fájlnak (WindowsQoSTrafficer.cfg):",
 "Válassz könyvtárat a CSV pillanatkép mentéséhez:",
 "Bemenő Adat",
 "Kimenő Adat",
@@ -199,7 +199,7 @@
 "Kérlek válassz ki legalább egy napot, vagy mellőzd a Hét napja opciót.",
 "Nem sikerült a CSV fájl létrehozása.\n"
 "Győződj meg róla, hogy az alkalmazásnak van írási jogosultsága a könyvtárhoz.",
-"BandwidthShaper Statisztika\n",
+"Windows QoS Trafficer Statisztika\n",
 "Generálva,%04u-%02u-%02u %02u:%02u:%02u\n\n",
 "Folyamatszintű Forgalom\n",
 "Folyamat,Leírás,Bejövő Adat (MB),Kimenő Adat (MB),Összesen (MB),Bejövő Kvóta (MB),Kimenő Kvóta (MB),Kimerített Kvóta\n",
@@ -298,7 +298,7 @@
 "Folyamatnév (az .exe nélkül):",
 "Hozzáadás",
 
-"Statisztika - BandwidthShaper",
+"Statisztika - Windows QoS Trafficer",
 "Letöltési előzmény",
 "Feltöltési előzmény",
 "Folyamatszintű forgalom",

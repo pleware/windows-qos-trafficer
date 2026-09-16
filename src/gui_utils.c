@@ -1293,7 +1293,7 @@ void TrayAdd(HWND hWnd) {
     // Fallback to a stock icon if no app icon is embedded
     if (!g_app.nid.hIcon)
         g_app.nid.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-    wcsncpy(g_app.nid.szTip, L"BandwidthShaper", ARRAYSIZE(g_app.nid.szTip));
+    wcsncpy(g_app.nid.szTip, L"Windows QoS Trafficer", ARRAYSIZE(g_app.nid.szTip));
 
     Shell_NotifyIcon(NIM_ADD, &g_app.nid);
     g_app.tray_added = true;
@@ -1416,7 +1416,7 @@ bool ResolveOrFallbackDir(const wchar_t *dir, wchar_t *out, DWORD cchOut) {
     return true;
 }
 
-// Build absolute path to "BandwidthShaper.cfg".
+// Build absolute path to "WindowsQoSTrafficer.cfg".
 // Uses g_app.options.config_dir when set; falls back to the exe directory.
 bool Settings_GetPath(wchar_t *path, DWORD cchPath) {
     wchar_t dir[MAX_PATH];
@@ -1424,7 +1424,7 @@ bool Settings_GetPath(wchar_t *path, DWORD cchPath) {
 
     if (dir[0] == L'\0') {
         // Last resort: write relative to current directory
-        wcsncpy(path, L"BandwidthShaper.cfg", cchPath - 1);
+        wcsncpy(path, L"WindowsQoSTrafficer.cfg", cchPath - 1);
         path[cchPath - 1] = L'\0';
         return true;
     }
@@ -1432,7 +1432,7 @@ bool Settings_GetPath(wchar_t *path, DWORD cchPath) {
     // dir already ends with a backslash
     wcsncpy(path, dir, cchPath - 1);
     path[cchPath - 1] = L'\0';
-    wcsncat(path, L"BandwidthShaper.cfg", cchPath - wcslen(path) - 1);
+    wcsncat(path, L"WindowsQoSTrafficer.cfg", cchPath - wcslen(path) - 1);
     return true;
 }
 
@@ -1457,7 +1457,7 @@ void Settings_Save(void) {
     wchar_t exe_dir[MAX_PATH];
     GetExeDir(exe_dir, MAX_PATH);
     wchar_t default_path[MAX_PATH];
-    swprintf(default_path, MAX_PATH, L"%sBandwidthShaper.cfg", exe_dir);
+    swprintf(default_path, MAX_PATH, L"%sWindowsQoSTrafficer.cfg", exe_dir);
 
     // Build the authoritative (possibly custom) path
     wchar_t auth_path[MAX_PATH];
@@ -1609,7 +1609,7 @@ void Settings_Load(void) {
     {
         wchar_t exe_dir[MAX_PATH];
         GetExeDir(exe_dir, MAX_PATH);
-        swprintf(default_path, MAX_PATH, L"%sBandwidthShaper.cfg", exe_dir);
+        swprintf(default_path, MAX_PATH, L"%sWindowsQoSTrafficer.cfg", exe_dir);
     }
 
     const wchar_t *S = L"Settings";
@@ -1801,7 +1801,7 @@ void Localization_EarlyInit(void) {
     if (sep) *(sep + 1) = L'\0';
 
     // Read from default location to get ConfigDir
-    swprintf(default_path, MAX_PATH, L"%sBandwidthShaper.cfg", exe_dir);
+    swprintf(default_path, MAX_PATH, L"%sWindowsQoSTrafficer.cfg", exe_dir);
     GetPrivateProfileStringW(L"Settings", L"ConfigDir", L"", config_dir, MAX_PATH, default_path);
     GetPrivateProfileStringW(L"Settings", L"SnapshotDir", L"", snapshot_dir, MAX_PATH, default_path);
 
@@ -1817,7 +1817,7 @@ void Localization_EarlyInit(void) {
                 if (len > 0 && full[len-1] != L'\\' && full[len-1] != L'/') {
                     if (len + 2 < MAX_PATH) { full[len] = L'\\'; full[len+1] = L'\0'; }
                 }
-                swprintf(auth_path, MAX_PATH, L"%sBandwidthShaper.cfg", full);
+                swprintf(auth_path, MAX_PATH, L"%sWindowsQoSTrafficer.cfg", full);
             } else {
                 // Directory doesn't exist - fall back to exe dir
                 wcsncpy(auth_path, default_path, MAX_PATH);

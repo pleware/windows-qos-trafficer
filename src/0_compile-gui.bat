@@ -103,7 +103,7 @@ set WINDIVERT_X64=external\lib\X64\WinDivert64.lib
 set WINDIVERT_ARM64=external\lib\ARM64\WinDivert.lib
 
 :: Release paths
-set REL_X86=release\GUI\x86\BandwidthShaper.exe
-set REL_X64=release\GUI\x64\BandwidthShaper.exe
-set REL_ARM64=release\GUI\arm64\BandwidthShaper.exe
+set REL_X86=release\GUI\x86\WindowsQoSTrafficer.exe
+set REL_X64=release\GUI\x64\WindowsQoSTrafficer.exe
+set REL_ARM64=release\GUI\arm64\WindowsQoSTrafficer.exe
 goto :eof

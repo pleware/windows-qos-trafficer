@@ -2030,7 +2030,7 @@ LRESULT CALLBACK ChartWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam,
 // Writes per-process traffic table + summary to a timestamped CSV file
 // next to the executable.  Returns true on success.
 bool SaveStatisticsToCSV(HWND hParent) {
-    // Build output path: <snapshot_dir>\BandwidthShaper_YYYYMMDD_HHMM.csv
+    // Build output path: <snapshot_dir>\WindowsQoSTrafficer_YYYYMMDD_HHMM.csv
     // snapshot_dir is resolved (with fallback to exe dir) by ResolveOrFallbackDir
     // inside Settings_GetSnapshotDir, called here directly.
     extern bool ResolveOrFallbackDir(const wchar_t*, wchar_t*, DWORD);
@@ -2050,7 +2050,7 @@ bool SaveStatisticsToCSV(HWND hParent) {
     GetLocalTime(&st);
     wchar_t filename[MAX_PATH];
     swprintf(filename, MAX_PATH,
-             L"%sBandwidthShaper_%04u%02u%02u_%02u%02u.csv",
+             L"%sWindowsQoSTrafficer_%04u%02u%02u_%02u%02u.csv",
              snap_dir,
              st.wYear, st.wMonth, st.wDay,
              st.wHour, st.wMinute);

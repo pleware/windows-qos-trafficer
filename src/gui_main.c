@@ -156,10 +156,10 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE hPrev, LPWSTR lpCmdLine, int nCmd
     }
 
     // Check for existing instance
-    HANDLE hMutex = CreateMutexW(NULL, TRUE, L"BandwidthShaper_SingleInstance");
+    HANDLE hMutex = CreateMutexW(NULL, TRUE, L"WindowsQoSTrafficer_SingleInstance");
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
         // Another instance is running - bring it to front and exit
-        HWND hExisting = FindWindowW(L"BandwidthShaperMain", NULL);
+        HWND hExisting = FindWindowW(L"WindowsQoSTrafficerMain", NULL);
         if (hExisting) {
             ShowWindow(hExisting, SW_RESTORE);
             SetForegroundWindow(hExisting);
@@ -215,7 +215,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE hPrev, LPWSTR lpCmdLine, int nCmd
     wc.hCursor = LoadCursor(NULL, IDC_ARROW);
     wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wc.lpszMenuName = MAKEINTRESOURCE(IDR_MAIN_MENU);
-    wc.lpszClassName = L"BandwidthShaperMain";
+    wc.lpszClassName = L"WindowsQoSTrafficerMain";
     wc.hIconSm = LoadIcon(g_hInst, MAKEINTRESOURCE(1));
     if (!wc.hIconSm)
         wc.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
@@ -228,7 +228,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE hPrev, LPWSTR lpCmdLine, int nCmd
     // Create main window
     UINT startDpi = GetDpiForSystem();  // safe before the window exists
     HWND hWnd = CreateWindowExW(
-        0, L"BandwidthShaperMain", L"BandwidthShaper",
+        0, L"WindowsQoSTrafficerMain", L"Windows QoS Trafficer",
         WS_OVERLAPPEDWINDOW & ~WS_THICKFRAME,
         CW_USEDEFAULT, CW_USEDEFAULT, MulDiv(1000, startDpi, 96), MulDiv(700, startDpi, 96),
         NULL, NULL, hInst, NULL
@@ -272,7 +272,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE hPrev, LPWSTR lpCmdLine, int nCmd
     DestroyAcceleratorTable(hAccel);
     WSACleanup();
     CloseHandle(hMutex);
-    UnregisterClassW(L"BandwidthShaperMain", hInst);
+    UnregisterClassW(L"WindowsQoSTrafficerMain", hInst);
     if (comInitialized) {
         CoUninitialize();
     }
