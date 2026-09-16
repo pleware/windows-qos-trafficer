@@ -2854,7 +2854,7 @@ LRESULT onCreate(HWND hWnd) {
     
     g_app.current_unit = UNIT_KB;
     g_app.minimize_to_tray = true;
-    g_app.options.save_settings = false;
+    g_app.options.save_settings = true;
     g_app.options.save_sticky_settings = false;
     g_app.options.qos_fair_share = true;
 
@@ -2928,6 +2928,12 @@ LRESULT onCreate(HWND hWnd) {
     if (g_app.minimize_to_tray) TrayAdd(hWnd);
     RefreshProcessList();
     AutoSizeProcessListColumns();
+
+    // Auto-start the shaper when a NIC is already configured: the app launches
+    // with Windows, sits in the tray, and shapes traffic without manual input.
+    if (g_app.options.selected_nics[0] != L'\0') {
+        StartShaper();
+    }
 
     if (!init_success) {
         // Clean up on partial initialization failure
