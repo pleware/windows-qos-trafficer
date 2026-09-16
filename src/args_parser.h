@@ -56,6 +56,9 @@ typedef struct ParsedArgs {
     bool quiet_mode;
     bool enable_statistics;
 
+    // fair-share QoS (-F / --fair-share)
+    bool qos_fair_share;
+
     // Per-process rules
     // Each entry covers rate limits, optional per-process data quotas, and an
     // optional schedule window.  All three may be set on the same identifier.

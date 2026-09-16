@@ -258,6 +258,9 @@ bool parse_args(int argc, char **argv, ParsedArgs *args) {
         } else if ((strcmp(argv[i], "--statistics") == 0 || strcmp(argv[i], "-s") == 0)) {
             args->enable_statistics = true;
 
+        } else if ((strcmp(argv[i], "--fair-share") == 0 || strcmp(argv[i], "-F") == 0)) {
+            args->qos_fair_share = true;
+
         } else if ((strcmp(argv[i], "--quiet") == 0 || strcmp(argv[i], "-q") == 0)) {
             args->quiet_mode = true;
 
@@ -490,6 +493,12 @@ static bool apply_config_value(const char *key, const char *value,
             args->quiet_mode = true;
         return true;
     }
+    if (strcmp(key, "fair-share") == 0 || strcmp(key, "fair_share") == 0) {
+        if (strcmp(value, "true") == 0 || strcmp(value, "1") == 0 ||
+            strcmp(value, "yes")  == 0 || strcmp(value, "on") == 0)
+            args->qos_fair_share = true;
+        return true;
+    }
     if (strcmp(key, "list-nics") == 0 || strcmp(key, "list_nics") == 0) {
         if (strcmp(value, "true") == 0 || strcmp(value, "1") == 0 ||
             strcmp(value, "yes")  == 0 || strcmp(value, "on") == 0)
@@ -644,6 +653,7 @@ void print_help(const char *program_path) {
     printf(C(CLI_HELP_TCP_LIMIT));
     printf(C(CLI_HELP_UDP_LIMIT));
     printf(C(CLI_HELP_BURST));
+    printf(C(CLI_HELP_FAIR_SHARE));
     printf(C(CLI_HELP_LATENCY));
     printf(C(CLI_HELP_PACKET_LOSS));
     printf(C(CLI_HELP_NIC));

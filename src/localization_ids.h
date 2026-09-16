@@ -278,6 +278,11 @@ typedef enum {
     CLI_HELP_QUIET,
     CLI_HELP_VERSION,
     CLI_HELP_HELP,
+    CLI_HELP_FAIR_SHARE,
+    CLI_QOS_ENABLED,
+    CLI_QOS_CAP_DL,
+    CLI_QOS_CAP_UL,
+    CLI_QOS_RELEASED,
 
     // ----------------------------------------------------------------
     // GUI_ : GUI-only strings (wide char)

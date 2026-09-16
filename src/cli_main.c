@@ -18,6 +18,7 @@
 #include "shaper_core.h"
 #include "shaper_utils.h"
 #include "schedule.h"
+#include "qos_fair.h"
 #include "localization_api.h"
 
 // -----------------------------------------------------------------------
@@ -130,6 +131,11 @@ static void print_startup_summary(const ParsedArgs *args) {
         schedule_describe(&args->global_schedule, sched_buf, _countof(sched_buf));
         printf(C(CLI_GLOBAL_SCHEDULE), sched_buf);
         printf(C(CLI_GLOBAL_SCHED_NOTE));
+    }
+
+    // Fair-share QoS
+    if (args->qos_fair_share) {
+        printf(C(CLI_QOS_ENABLED), QOS_FAIR_SHARE_PERCENT);
     }
 
     printf(C(CLI_QUIT_HINT));
@@ -435,6 +441,9 @@ int cli_run(int argc, char **argv) {
         goto cleanup_args;
     }
 
+    // Fair-share QoS controller (created lazily once the shaper is running).
+    QosFairController *qos = NULL;
+
     // Register per-process rules collected during parsing
     if (!register_rules(shaper, &args)) {
         exit_code = EXIT_FAILURE;
@@ -478,6 +487,10 @@ int cli_run(int argc, char **argv) {
     unsigned int stats_interval_ms = args.stats_interval_ms;
     Schedule global_schedule = args.global_schedule;
     DWORD quota_check_interval = args.quota_check_interval_ms;
+    bool qos_fair_share = args.qos_fair_share;
+
+    // Fair-share QoS controller (owns dynamic per-PID caps while running).
+    qos = qos_fair_share ? qos_fair_create() : NULL;
 
     // Print summary before transferring rules_list
     print_startup_summary(&args);
@@ -622,6 +635,11 @@ int cli_run(int argc, char **argv) {
             }
         }
 
+        // Fair-share QoS: one control iteration per tick (self-throttled).
+        if (qos) {
+            qos_fair_tick(qos, shaper, quiet_mode);
+        }
+
         Sleep(100);
     }
 
@@ -634,6 +652,7 @@ int cli_run(int argc, char **argv) {
     stop_windivert();
 
     cleanup_shaper:
+        if (qos) qos_fair_destroy(qos);
         shaper_destroy(shaper);
 
     cleanup_args:

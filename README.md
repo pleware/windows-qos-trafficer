@@ -78,6 +78,7 @@ Options:
   -t, --tcp-limit <NUM>                         Max active TCP connections (0 = unlimited)
   -r, --udp-limit <NUM>                         Max UDP packets/sec (0 = unlimited)
   -b, --burst <RATE>[b|Kb|KB|Mb|MB|Gb|GB]       Burst size override (0 = use buffer size)
+  -F, --fair-share                              Fair-share QoS: auto-cap a single process hogging the link
   -L, --latency <ms>                            Simulated latency in ms (0 = none)
   -m, --packet-loss <float>                     Simulated packet loss % (0.00 = none)
   -n, --nic <index>[:<DL>:<UL>][,...]           NIC index(es) to throttle; optional per-NIC rates
@@ -174,6 +175,25 @@ schedule = 0000-2359~1-7     ; Global fallback schedule
 ```
 
 There has to be a --rule, --stop-at, --process, or --pid before the --schedule. If yes, it applies the schedule to that specific rule. If not, it becomes a global schedule that applies to all throttled traffic. So you have to remember, that the order matters here: the schedule must come after the process/rule it applies to, not before. Each process target can have its own unique schedule. If a schedule appears before any process targets, it applies to all throttled traffic.
+
+## Fair-share QoS (anti-hog)
+
+The `-F` / `--fair-share` flag adds a simple QoS controller that stops any **single process** from monopolising your upload or download bandwidth — no per-process rules required.
+
+```
+# Keep any one process from taking more than ~70% of the link, leaving
+# the rest for everything else.
+BandwidthShaper.exe -n 15 -F
+```
+
+How it works:
+
+* **Auto-detected capacity.** The controller learns your link speed as the decaying high-water mark of observed total throughput — you do not need to tell it your plan's line rate. (Because of this, it operates relative to your *actual* peak usage, not the theoretical speed of your contract.)
+* **Every second** it measures per-process throughput (upload and download separately) using the same per-PID counters the statistics view uses.
+* When at least two processes are active and one of them exceeds **70%** of the detected capacity, that process is given a dynamic per-PID cap at 70% — the remaining 30% stays free for the rest.
+* The cap is released automatically once the process's demand drops for a few seconds (for example, its big download finished).
+
+A single process running on its own is never throttled — there is nothing to starve. The 70% cap and the 1-second interval are compile-time constants in `src/qos_fair.h` if you want to tune them.
 
 ## Translation
 

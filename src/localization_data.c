@@ -287,6 +287,12 @@ const char * const lang_cli_en[_STR_COUNT] = {
     "Display version and exit\n",
     /*CLI_HELP_HELP*/ "  -h, --help                                    "
     "Display this help and exit\n",
+    /*CLI_HELP_FAIR_SHARE*/ "  -F, --fair-share                             "
+    "Auto-cap a single process hogging the link (fair-share QoS)\n",
+    /*CLI_QOS_ENABLED*/ "Fair-share QoS: enabled (auto-detect capacity, %d%% cap per process)\n",
+    /*CLI_QOS_CAP_DL*/ "QoS: capping PID %u download to %.1f KB/s\n",
+    /*CLI_QOS_CAP_UL*/ "QoS: capping PID %u upload to %.1f KB/s\n",
+    /*CLI_QOS_RELEASED*/ "QoS: released PID %u\n",
     /*GUI_ERR_COM_INIT*/ "",
     /*GUI_ADMIN_REQUIRED_MSG*/ "",
     /*GUI_ADMIN_REQUIRED_CAP*/ "",
@@ -763,6 +769,11 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     /*CLI_HELP_QUIET*/ L"",
     /*CLI_HELP_VERSION*/ L"",
     /*CLI_HELP_HELP*/ L"",
+    /*CLI_HELP_FAIR_SHARE*/ L"",
+    /*CLI_QOS_ENABLED*/ L"",
+    /*CLI_QOS_CAP_DL*/ L"",
+    /*CLI_QOS_CAP_UL*/ L"",
+    /*CLI_QOS_RELEASED*/ L"",
     /*GUI_ERR_COM_INIT*/ L"Failed to initialize COM",
     /*GUI_ADMIN_REQUIRED_MSG*/ L"This program requires administrator privileges to work.\n\n"
     L"Would you like to try to elevate it?",
@@ -1344,6 +1355,12 @@ const char * const lang_cli_hu[_STR_COUNT] = {
     "A verziószám kiírása és kilépés\n",
     /*CLI_HELP_HELP*/ "  -h, --help                                    "
     "Eme súgó kiírása és kilépés\n",
+    /*CLI_HELP_FAIR_SHARE*/ "  -F, --fair-share                             "
+    "Fair-share QoS: egyetlen folyamat se foglalhassa le a teljes sávszélességet\n",
+    /*CLI_QOS_ENABLED*/ "Fair-share QoS: engedélyezve (automatikus érzékelés, %d%% korlát folyamatonként)\n",
+    /*CLI_QOS_CAP_DL*/ "QoS: %u PID letöltési korlátozása %.1f KB/s-ra\n",
+    /*CLI_QOS_CAP_UL*/ "QoS: %u PID feltöltési korlátozása %.1f KB/s-ra\n",
+    /*CLI_QOS_RELEASED*/ "QoS: %u PID korlátozása feloldva\n",
     /*GUI_ERR_COM_INIT*/ "",
     /*GUI_ADMIN_REQUIRED_MSG*/ "",
     /*GUI_ADMIN_REQUIRED_CAP*/ "",
@@ -1820,6 +1837,11 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     /*CLI_HELP_QUIET*/ L"",
     /*CLI_HELP_VERSION*/ L"",
     /*CLI_HELP_HELP*/ L"",
+    /*CLI_HELP_FAIR_SHARE*/ L"",
+    /*CLI_QOS_ENABLED*/ L"",
+    /*CLI_QOS_CAP_DL*/ L"",
+    /*CLI_QOS_CAP_UL*/ L"",
+    /*CLI_QOS_RELEASED*/ L"",
     /*GUI_ERR_COM_INIT*/ L"Nem sikerült a COM elindítása",
     /*GUI_ADMIN_REQUIRED_MSG*/ L"Ez a program adminisztrátori jogosultságot igényel a futtatásához.\n\n"
     L"Megpróbálod lekérni most ezt a jogosultságot?",
