@@ -64,3 +64,38 @@ jobs:
       with:
         name: WindowsQoSTrafficer-GUI
         path: src/release/GUI/
+
+    - name: Download WinDivert runtime
+      shell: pwsh
+      run: |
+        $ErrorActionPreference = 'Stop'
+        $url = 'https://reqrypt.org/download/WinDivert-2.2.2-A.zip'
+        $zip = Join-Path $env:RUNNER_TEMP 'WinDivert-2.2.2-A.zip'
+        Invoke-WebRequest -Uri $url -OutFile $zip
+        $hash = (Get-FileHash $zip -Algorithm SHA256).Hash
+        if ($hash -ne '63CB41763BB4B20F600B6DE04E991A9C2BE73279E317D4D82F237B150C5F3F15') {
+          throw "WinDivert SHA256 mismatch: $hash"
+        }
+        $wd = Join-Path $env:RUNNER_TEMP 'wd'
+        Expand-Archive -Path $zip -DestinationPath $wd -Force
+        New-Item -ItemType Directory -Force -Path 'installer\windivert\x64' | Out-Null
+        Copy-Item "$wd\WinDivert-2.2.2-A\x64\WinDivert.dll" 'installer\windivert\x64\'
+        Copy-Item "$wd\WinDivert-2.2.2-A\x64\WinDivert64.sys" 'installer\windivert\x64\'
+        Copy-Item "$wd\WinDivert-2.2.2-A\LICENSE" 'installer\windivert\'
+
+    - name: Install Inno Setup
+      shell: cmd
+      run: choco install innosetup --no-progress -y
+
+    - name: Compile installer
+      shell: cmd
+      run: |
+        "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /Q installer\windows-qos-trafficer.iss
+        if errorlevel 1 exit /b 1
+
+    - name: Upload installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: WindowsQoSTrafficer-Setup
+        path: dist/WindowsQoSTrafficer-Setup-*.exe
+        if-no-files-found: error

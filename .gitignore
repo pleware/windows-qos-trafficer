@@ -1,0 +1,9 @@
+# Build output
+dist/
+src/release/
+src/*.obj
+src/*.res
+src/tests.exe
+
+# Downloaded at CI time (not committed)
+installer/windivert/
