@@ -15,6 +15,7 @@
 #include <commctrl.h>
 #include <uxtheme.h>
 #include <windowsx.h>
+#include <winreg.h>
 
 // ---------------------------------------------------------------------------
 // Acessors
@@ -441,13 +442,35 @@ int S(int px) {
 
 void RecreateUiFont(void) {
     if (g_app.hUiFont) { DeleteObject(g_app.hUiFont); g_app.hUiFont = NULL; }
+
+    const wchar_t *face = L"Segoe UI Variable"; // Win11 default; fall back on older Windows
     g_app.hUiFont = CreateFontW(
         -S(13),  // height (negative = character height, not cell height)
         0, 0, 0,
         FW_NORMAL, FALSE, FALSE, FALSE,
         DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
         CLEARTYPE_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-        L"Segoe UI");
+        face);
+
+    // If "Segoe UI Variable" is unavailable (Win10), GDI silently substitutes a
+    // different face — detect that and fall back to "Segoe UI".
+    if (g_app.hUiFont) {
+        HDC hdc = GetDC(NULL);
+        HFONT old = (HFONT)SelectObject(hdc, g_app.hUiFont);
+        wchar_t actual[64] = {0};
+        GetTextFaceW(hdc, 63, actual);
+        SelectObject(hdc, old);
+        ReleaseDC(NULL, hdc);
+        if (wcsncmp(actual, face, wcslen(face)) != 0) {
+            DeleteObject(g_app.hUiFont);
+            g_app.hUiFont = CreateFontW(
+                -S(13), 0, 0, 0,
+                FW_NORMAL, FALSE, FALSE, FALSE,
+                DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
+                CLEARTYPE_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+                L"Segoe UI");
+        }
+    }
 }
 
 static BOOL CALLBACK SetFontProc(HWND hWnd, LPARAM lParam) {
@@ -557,14 +580,61 @@ void CleanupDarkMode(void) {
 
 // Reads AppsUseLightTheme from HKCU; returns TRUE if system is in dark mode.
 bool DarkMode_SystemIsDark(void) {
-    // Custom dark mode is disabled: its brush/theme application paints dialog
-    // controls black-on-black on some systems. Force light mode for now.
-    return false;
+    HKEY hKey;
+    DWORD value = 1; // default: light
+    DWORD size = sizeof(value);
+    if (RegOpenKeyExW(HKEY_CURRENT_USER,
+            L"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+            0, KEY_QUERY_VALUE, &hKey) == ERROR_SUCCESS) {
+        RegQueryValueExW(hKey, L"AppsUseLightTheme", NULL, NULL, (LPBYTE)&value, &size);
+        RegCloseKey(hKey);
+    }
+    return (value == 0);
 }
 
 void DarkMode_InitUxtheme(void) {
-    // Disabled alongside the custom dark mode (see DarkMode_SystemIsDark).
-    return;
+    // Enable the app to follow the system light/dark theme natively. This
+    // replaces the old custom owner-draw dark mode (which painted controls
+    // black-on-black); standard controls now theme themselves via visual styles.
+    HMODULE hUxtheme = LoadLibraryW(L"uxtheme.dll");
+    if (!hUxtheme) return;
+
+    fnAllowDarkModeForWindow allowWindow =
+        (fnAllowDarkModeForWindow)GetProcAddress(hUxtheme, MAKEINTRESOURCEA(133));
+    fnSetPreferredAppMode setMode =
+        (fnSetPreferredAppMode)GetProcAddress(hUxtheme, MAKEINTRESOURCEA(135));
+    _RefreshImmersiveColorPolicyState =
+        (fnRefreshImmersiveColorPolicyState)GetProcAddress(hUxtheme, MAKEINTRESOURCEA(104));
+    _AllowDarkModeForWindow = allowWindow;
+
+    if (setMode) {
+        setMode(AppMode_AllowDark);
+        if (_RefreshImmersiveColorPolicyState) _RefreshImmersiveColorPolicyState();
+    }
+}
+
+// Applies native dark mode to a window (title bar + standard controls),
+// following the system theme. Independent of the old custom-painting path
+// (g_app.dark_mode stays false so the owner-draw code never runs).
+void DarkMode_ApplyWindow(HWND hWnd) {
+    if (!hWnd || !IsWindow(hWnd)) return;
+
+    if (_AllowDarkModeForWindow) _AllowDarkModeForWindow(hWnd, true);
+
+    static HRESULT (WINAPI *pDwmSetWindowAttribute)(HWND, DWORD, LPCVOID, DWORD) = NULL;
+    static BOOL dwmLoaded = FALSE;
+    if (!dwmLoaded) {
+        HMODULE hDwm = LoadLibraryW(L"dwmapi.dll");
+        if (hDwm) pDwmSetWindowAttribute =
+            (HRESULT (WINAPI *)(HWND, DWORD, LPCVOID, DWORD))GetProcAddress(hDwm, "DwmSetWindowAttribute");
+        dwmLoaded = TRUE;
+    }
+    if (pDwmSetWindowAttribute) {
+        BOOL dark = DarkMode_SystemIsDark();
+        // DWMWA_USE_IMMERSIVE_DARK_MODE: 20 (Win10 2004+) and 19 (older builds).
+        pDwmSetWindowAttribute(hWnd, 20, &dark, sizeof(dark));
+        pDwmSetWindowAttribute(hWnd, 19, &dark, sizeof(dark));
+    }
 }
 
 void ApplyDarkModeToAllControls(HWND hParent, bool enable) {
@@ -2840,12 +2910,11 @@ LRESULT onCreate(HWND hWnd) {
         init_success = false;
     }
 
-    // Apply dark mode if enabled (after all controls created)
+    // Apply native dark mode (follows the system theme). The old custom
+    // owner-draw dark mode stays off so it can't paint controls black-on-black.
     DarkMode_InitUxtheme();
-    g_app.dark_mode = DarkMode_SystemIsDark();
-    if (g_app.dark_mode) {
-        ApplyDarkModeToAllControls(hWnd, true);
-    }
+    g_app.dark_mode = false;
+    DarkMode_ApplyWindow(hWnd);
 
     // Start timers
     ApplyUpdateFrequency(g_app.freq_idx);
@@ -2991,24 +3060,10 @@ LRESULT areaNC(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 LRESULT settingChanged(HWND hWnd, WPARAM wParam, LPARAM lParam) {
     if (lParam && wcscmp((wchar_t*)lParam, L"ImmersiveColorSet") == 0) {
-        BOOL nowDark = DarkMode_SystemIsDark();
-        if (nowDark != g_app.dark_mode) {
-            g_app.dark_mode = nowDark;
-            ApplyDarkModeToAllControls(hWnd, g_app.dark_mode);
-            // Recolour the ListView explicitly since it needs extra calls
-            if (g_app.dark_mode) {
-                ApplyDarkModeToListViewHeader(g_app.hProcessList);
-            }
-            /*if (g_app.hStatsWnd) {
-                SendMessage(g_app.hStatsWnd, WM_SETTINGCHANGE, wParam, lParam);
-                ApplyDarkModeToAllControls(g_app.hStatsWnd, g_app.dark_mode);
-                UpdateStatistics_RichBox();
-            }*/
-
-            InvalidateRect(hWnd, NULL, TRUE);
-            // Force full redraw of main window
-            RedrawWindow(hWnd, NULL, NULL, RDW_ERASE | RDW_INVALIDATE | RDW_FRAME | RDW_ALLCHILDREN);
-        }
+        DarkMode_ApplyWindow(hWnd);
+        InvalidateRect(hWnd, NULL, TRUE);
+        // Force full redraw of main window
+        RedrawWindow(hWnd, NULL, NULL, RDW_ERASE | RDW_INVALIDATE | RDW_FRAME | RDW_ALLCHILDREN);
     }
     return FALSE;
 }

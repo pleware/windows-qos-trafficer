@@ -58,6 +58,7 @@ void InitializeDarkMode(void);
 void CleanupDarkMode(void);
 bool DarkMode_SystemIsDark(void);
 void DarkMode_InitUxtheme(void);
+void DarkMode_ApplyWindow(HWND hWnd);
 void ApplyDarkModeToAllControls(HWND hParent, bool enable);
 void ApplyDarkModeToListViewHeader(HWND hListView);
 void ApplyDarkModeToDialog(HWND hDlg);

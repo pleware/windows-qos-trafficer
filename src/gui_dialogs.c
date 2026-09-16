@@ -312,6 +312,9 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
 
     switch (msg) {
     case WM_INITDIALOG: {
+        // Native dark mode (follows system theme)
+        DarkMode_ApplyWindow(hDlg);
+
         // Insert the four tab items (labels set by RefreshOptionsDlgStrings)
         {
             HWND hTabs = GetDlgItem(hDlg, IDC_OPT_TABS);
@@ -571,7 +574,8 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
 
     case WM_SETTINGCHANGE: {
         if (lParam && wcscmp((wchar_t*)lParam, L"ImmersiveColorSet") == 0) {
-            DarkMode_ApplyToDialog(hDlg);
+            DarkMode_ApplyWindow(hDlg);
+            InvalidateRect(hDlg, NULL, TRUE);
         }
         break;
     }
@@ -754,6 +758,9 @@ INT_PTR CALLBACK StatsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 
     switch (msg) {
     case WM_INITDIALOG:
+        // Native dark mode (follows system theme)
+        DarkMode_ApplyWindow(hDlg);
+
         // Apply translatable strings to static labels and buttons
         s_lang_on_entry = loc_get_language();
         RefreshStatsDlgStrings(hDlg);
@@ -1347,50 +1354,9 @@ INT_PTR CALLBACK StatsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 
     case WM_SETTINGCHANGE: {
         if (lParam && wcscmp((wchar_t*)lParam, L"ImmersiveColorSet") == 0) {
-            BOOL nowDark = DarkMode_SystemIsDark();
-            if (nowDark != g_app.dark_mode) {
-                g_app.dark_mode = nowDark;
-
-                ApplyDarkModeToAllControls(hDlg, g_app.dark_mode);
-
-                // Re-apply theme to RichEdit
-                HWND hRichEdit = GetDlgItem(hDlg, IDC_STATS_TEXT);
-                if (hRichEdit) {
-                    if (g_app.dark_mode) {
-                        SetWindowTheme(hRichEdit, L"DarkMode_Explorer", NULL);
-                        SendMessage(hRichEdit, EM_SETBKGNDCOLOR, 0, (LPARAM)g_app.dark_list_bg);
-
-                        CHARFORMAT2W cf = { sizeof(cf) };
-                        cf.dwMask = CFM_COLOR | CFM_BACKCOLOR;
-                        cf.crTextColor = g_app.dark_text;
-                        cf.crBackColor = g_app.dark_list_bg;
-                        cf.dwEffects = 0;
-                        SendMessage(hRichEdit, EM_SETCHARFORMAT, SCF_ALL, (LPARAM)&cf);
-                    } else {
-                        SetWindowTheme(hRichEdit, L"Explorer", NULL);
-                        SendMessage(hRichEdit, EM_SETBKGNDCOLOR, 0, (LPARAM)GetSysColor(COLOR_WINDOW));
-                        
-                        CHARFORMAT2W cf = { sizeof(cf) };
-                        cf.dwMask = CFM_COLOR | CFM_BACKCOLOR;
-                        cf.crTextColor = GetSysColor(COLOR_WINDOWTEXT);
-                        cf.crBackColor = GetSysColor(COLOR_WINDOW);
-                        cf.dwEffects = 0;
-                        SendMessage(hRichEdit, EM_SETCHARFORMAT, SCF_ALL, (LPARAM)&cf);
-                    }
-                    InvalidateRect(hRichEdit, NULL, TRUE);
-                }
-
-                // Also update ListView
-                HWND hProcList = GetDlgItem(hDlg, IDC_STATS_PROC_LIST);
-                if (hProcList) {
-                    ApplyDarkModeToListViewHeader(hProcList);
-                    InvalidateRect(hProcList, NULL, TRUE);
-                    RedrawWindow(hProcList, NULL, NULL, RDW_ERASE | RDW_INVALIDATE | RDW_FRAME | RDW_ALLCHILDREN | RDW_UPDATENOW);
-                }
-
-                // Other elements
-                DarkMode_ApplyToDialog(hDlg);
-            }
+            DarkMode_ApplyWindow(hDlg);
+            InvalidateRect(hDlg, NULL, TRUE);
+            RedrawWindow(hDlg, NULL, NULL, RDW_ERASE | RDW_INVALIDATE | RDW_FRAME | RDW_ALLCHILDREN | RDW_UPDATENOW);
         }
         break;
     }
@@ -1481,6 +1447,9 @@ INT_PTR CALLBACK SpecifyProcDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM l
     (void)lParam;
     switch (msg) {
     case WM_INITDIALOG:
+        // Native dark mode (follows system theme)
+        DarkMode_ApplyWindow(hDlg);
+
         // Apply translatable strings
         s_lang_on_entry = loc_get_language();
         RefreshSpecifyProcDlgStrings(hDlg);
@@ -1562,7 +1531,8 @@ INT_PTR CALLBACK SpecifyProcDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM l
 
     case WM_SETTINGCHANGE: {
         if (lParam && wcscmp((wchar_t*)lParam, L"ImmersiveColorSet") == 0) {
-            DarkMode_ApplyToDialog(hDlg);
+            DarkMode_ApplyWindow(hDlg);
+            InvalidateRect(hDlg, NULL, TRUE);
         }
         break;
     }
@@ -1651,6 +1621,9 @@ INT_PTR CALLBACK ScheduleDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPar
         ctx = (ScheduleDlgCtx *)lParam;
         SetWindowLongPtr(hDlg, GWLP_USERDATA, (LONG_PTR)ctx);
         ctx->initializing = true;  // suppress EN_CHANGE until controls are fully populated
+
+        // Native dark mode (follows system theme)
+        DarkMode_ApplyWindow(hDlg);
 
         // Title: process name
         ProcessEntry *proc = &g_app.processes[ctx->proc_idx];
