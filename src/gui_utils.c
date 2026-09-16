@@ -557,68 +557,14 @@ void CleanupDarkMode(void) {
 
 // Reads AppsUseLightTheme from HKCU; returns TRUE if system is in dark mode.
 bool DarkMode_SystemIsDark(void) {
-    DWORD val = 1; // default: light
-    DWORD cb  = sizeof(val);
-    RegGetValueW(
-        HKEY_CURRENT_USER,
-        L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-        L"AppsUseLightTheme",
-        RRF_RT_REG_DWORD, NULL, &val, &cb);
-    return (val == 0);
+    // Custom dark mode is disabled: its brush/theme application paints dialog
+    // controls black-on-black on some systems. Force light mode for now.
+    return false;
 }
 
 void DarkMode_InitUxtheme(void) {
-    HMODULE hUx;
-    FARPROC ord135;
-    DWORD build = 0;
-    DWORD cb = sizeof(build);
-
-    hUx = LoadLibraryExW(L"uxtheme.dll", NULL, LOAD_LIBRARY_SEARCH_SYSTEM32);
-    if (!hUx) return;
-
-    // Ordinal 133: AllowDarkModeForWindow - per-HWND opt-in
-    _AllowDarkModeForWindow = (fnAllowDarkModeForWindow)
-        GetProcAddress(hUx, MAKEINTRESOURCEA(133));
-
-    // Ordinal 104: RefreshImmersiveColorPolicyState
-    _RefreshImmersiveColorPolicyState = (fnRefreshImmersiveColorPolicyState)
-        GetProcAddress(hUx, MAKEINTRESOURCEA(104));
-
-    // Ordinal 135: SetPreferredAppMode (1903+) or AllowDarkModeForApp (1809)
-    ord135 = GetProcAddress(hUx, MAKEINTRESOURCEA(135));
-    if (ord135) {
-        // Read CurrentBuildNumber from the registry
-        RegGetValueW(
-            HKEY_LOCAL_MACHINE,
-            L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
-            L"CurrentBuildNumber",
-            RRF_RT_REG_SZ, NULL, NULL, &cb);
-        {
-            // cb now holds the byte size of the string
-            wchar_t buildStr[16] = {0};
-            cb = sizeof(buildStr);
-            if (RegGetValueW(
-                    HKEY_LOCAL_MACHINE,
-                    L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
-                    L"CurrentBuildNumber",
-                    RRF_RT_REG_SZ, NULL, buildStr, &cb) == ERROR_SUCCESS) {
-                build = (DWORD)_wtoi(buildStr);
-            }
-        }
-
-        if (build > 0 && build < 18362) {
-            // Windows 1809 / RS5: ordinal 135 is AllowDarkModeForApp(bool)
-            ((fnAllowDarkModeForApp)ord135)(TRUE);
-        } else {
-            // Windows 1903+ (build 18362+): SetPreferredAppMode(PreferredAppMode)
-            ((fnSetPreferredAppMode)ord135)(AppMode_AllowDark);
-        }
-    }
-
-    if (_RefreshImmersiveColorPolicyState)
-        _RefreshImmersiveColorPolicyState();
-
-    // Do not FreeLibrary here - keep hUx loaded so the function pointers remain valid
+    // Disabled alongside the custom dark mode (see DarkMode_SystemIsDark).
+    return;
 }
 
 void ApplyDarkModeToAllControls(HWND hParent, bool enable) {
@@ -2835,7 +2781,7 @@ LRESULT onCreate(HWND hWnd) {
     g_app.options.global_ul_limit = 0;
     
     g_app.current_unit = UNIT_KB;
-    g_app.minimize_to_tray = false;
+    g_app.minimize_to_tray = true;
     g_app.options.save_settings = false;
     g_app.options.save_sticky_settings = false;
 
