@@ -127,6 +127,8 @@
 #define IDC_OPT_LBL_CONFIG_HINT     3136
 #define IDC_OPT_LBL_SNAPSHOT_FOLDER 3137
 #define IDC_OPT_LBL_SNAPSHOT_HINT   3138
+#define IDC_OPT_TABS                3139
+#define IDC_OPT_QOS_DESC            3140
 
 // "Specify process" input dialog
 #define IDD_SPECIFY_PROC        105

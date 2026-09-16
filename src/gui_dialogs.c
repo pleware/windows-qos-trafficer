@@ -65,6 +65,62 @@ static int CALLBACK BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPAR
     return 0;
 }
 
+// ---------------------------------------------------------------------------
+// Options dialog: tabbed pages (show/hide groups per selected tab)
+// ---------------------------------------------------------------------------
+#define OPT_TAB_COUNT 4
+
+static const int g_opt_tab_bandwidth[] = {
+    IDC_OPT_GRP_GLOBAL_LIMITS, IDC_OPT_LBL_DOWNLOAD, IDC_OPT_DL_GLOBAL, IDC_OPT_LBL_DL_UNLIMITED,
+    IDC_OPT_LBL_UPLOAD, IDC_OPT_UL_GLOBAL, IDC_OPT_LBL_UL_UNLIMITED,
+    IDC_OPT_LBL_DATA_CAP, IDC_OPT_DATA_CAP, IDC_OPT_LBL_DATA_CAP_UNLIM,
+    IDC_OPT_GRP_BUFFER_SETTINGS, IDC_OPT_LBL_DL_BUFFER, IDC_OPT_DL_BUFFER, IDC_OPT_LBL_BYTES,
+    IDC_OPT_LBL_UL_BUFFER, IDC_OPT_UL_BUFFER, IDC_OPT_LBL_BYTES2,
+    IDC_OPT_LBL_BURST_SIZE, IDC_OPT_BURST_SIZE, IDC_OPT_LBL_BURST_AUTO,
+};
+static const int g_opt_tab_network[] = {
+    IDC_OPT_GRP_NIC_INTERFACES, IDC_OPT_LBL_NIC_SELECTED, IDC_OPT_NIC_LIST,
+    IDC_OPT_GRP_ADVANCED, IDC_OPT_LBL_TCP_LIMIT, IDC_OPT_TCP_LIMIT, IDC_OPT_LBL_TCP_UNLIM,
+    IDC_OPT_LBL_UDP_LIMIT, IDC_OPT_UDP_LIMIT, IDC_OPT_LBL_UDP_UNLIM,
+    IDC_OPT_LBL_LATENCY, IDC_OPT_LATENCY, IDC_OPT_LBL_MS2,
+    IDC_OPT_LBL_PACKET_LOSS, IDC_OPT_PACKET_LOSS, IDC_OPT_LBL_PERCENT,
+    IDC_OPT_LBL_PRIORITY, IDC_OPT_PRIORITY,
+};
+static const int g_opt_tab_qos[] = {
+    IDC_OPT_FAIR_SHARE, IDC_OPT_QOS_DESC,
+};
+static const int g_opt_tab_general[] = {
+    IDC_OPT_GRP_UPDATE_INTERVAL, IDC_OPT_LBL_UPDATE_EVERY, IDC_OPT_UPDATE_INTERVAL,
+    IDC_OPT_UPDATE_TYPE, IDC_OPT_UPDATE_TYPE + 1,
+    IDC_OPT_LBL_COOLDOWN, IDC_OPT_UPDATE_COOLDOWN, IDC_OPT_LBL_MS,
+    IDC_OPT_GRP_LANGUAGE, IDC_OPT_LBL_LANGUAGE, IDC_OPT_LANGUAGE,
+    IDC_OPT_GRP_BEHAVIOR, IDC_OPT_MINIMIZE_TRAY, IDC_OPT_SAVE_SETTINGS, IDC_OPT_SAVE_STICKY_SETTINGS,
+    IDC_OPT_GRP_FILE_PATHS, IDC_OPT_LBL_CONFIG_FOLDER, IDC_OPT_CONFIG_DIR, IDC_OPT_CONFIG_DIR_BROWSE,
+    IDC_OPT_LBL_CONFIG_HINT, IDC_OPT_LBL_SNAPSHOT_FOLDER, IDC_OPT_SNAPSHOT_DIR, IDC_OPT_SNAPSHOT_DIR_BROWSE,
+    IDC_OPT_LBL_SNAPSHOT_HINT,
+};
+
+static const int * const g_opt_tab_pages[OPT_TAB_COUNT] = {
+    g_opt_tab_bandwidth, g_opt_tab_network, g_opt_tab_qos, g_opt_tab_general,
+};
+static const int g_opt_tab_page_sizes[OPT_TAB_COUNT] = {
+    (int)(sizeof(g_opt_tab_bandwidth)/sizeof(int)),
+    (int)(sizeof(g_opt_tab_network)/sizeof(int)),
+    (int)(sizeof(g_opt_tab_qos)/sizeof(int)),
+    (int)(sizeof(g_opt_tab_general)/sizeof(int)),
+};
+
+static void ShowOptionsTab(HWND hDlg, int active) {
+    for (int t = 0; t < OPT_TAB_COUNT; t++) {
+        int show = (t == active) ? SW_SHOW : SW_HIDE;
+        const int *ids = g_opt_tab_pages[t];
+        for (int i = 0; i < g_opt_tab_page_sizes[t]; i++) {
+            HWND h = GetDlgItem(hDlg, ids[i]);
+            if (h) ShowWindow(h, show);
+        }
+    }
+}
+
 void RefreshOptionsDlgStrings(HWND hDlg) {
     SetWindowTextW(hDlg, T(GUI_RC_OPTIONS_CAP));
     SetDlgItemTextW(hDlg, IDC_OPT_GRP_GLOBAL_LIMITS, T(GUI_RC_OPT_GRP_GLOBAL_LIMITS));
@@ -113,6 +169,24 @@ void RefreshOptionsDlgStrings(HWND hDlg) {
     SetDlgItemTextW(hDlg, IDC_OPT_LBL_SNAPSHOT_HINT, T(GUI_RC_OPT_LBL_SNAPSHOT_HINT));
     SetDlgItemTextW(hDlg, IDOK, T(GUI_RC_BTN_OK));
     SetDlgItemTextW(hDlg, IDCANCEL, T(GUI_RC_BTN_CANCEL));
+
+    // QoS description + tab labels
+    SetDlgItemTextW(hDlg, IDC_OPT_QOS_DESC, T(GUI_RC_OPT_QOS_DESC));
+    {
+        HWND hTabs = GetDlgItem(hDlg, IDC_OPT_TABS);
+        if (hTabs) {
+            const wchar_t *labels[OPT_TAB_COUNT] = {
+                T(GUI_RC_OPT_TAB_BANDWIDTH), T(GUI_RC_OPT_TAB_NETWORK),
+                T(GUI_RC_OPT_TAB_QOS), T(GUI_RC_OPT_TAB_GENERAL),
+            };
+            for (int i = 0; i < OPT_TAB_COUNT; i++) {
+                TCITEMW ti = {0};
+                ti.mask = TCIF_TEXT;
+                ti.pszText = (LPWSTR)labels[i];
+                TabCtrl_SetItem(hTabs, i, &ti);
+            }
+        }
+    }
 
     // Refresh language dropdown items
     HWND hLang = GetDlgItem(hDlg, IDC_OPT_LANGUAGE);
@@ -238,6 +312,19 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
 
     switch (msg) {
     case WM_INITDIALOG: {
+        // Insert the four tab items (labels set by RefreshOptionsDlgStrings)
+        {
+            HWND hTabs = GetDlgItem(hDlg, IDC_OPT_TABS);
+            if (hTabs) {
+                for (int i = 0; i < OPT_TAB_COUNT; i++) {
+                    TCITEMW ti = {0};
+                    ti.mask = TCIF_TEXT;
+                    ti.pszText = L"";
+                    TabCtrl_InsertItem(hTabs, i, &ti);
+                }
+            }
+        }
+
         // Apply translatable strings to all static controls and group boxes
         s_lang_on_entry = loc_get_language();
         RefreshOptionsDlgStrings(hDlg);
@@ -379,11 +466,22 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
         CenterWindow(hDlg, GetParent(hDlg));
         ClampWindowToWorkArea(hDlg);
 
+        // Show the first tab's controls, hide the rest
+        ShowOptionsTab(hDlg, 0);
+
         return TRUE;
     }
 
     case WM_NOTIFY: {
         LPNMHDR pnmh = (LPNMHDR)lParam;
+
+        // Tab switch
+        if (pnmh->idFrom == IDC_OPT_TABS && pnmh->code == TCN_SELCHANGE) {
+            HWND hTabs = GetDlgItem(hDlg, IDC_OPT_TABS);
+            int sel = hTabs ? TabCtrl_GetCurSel(hTabs) : 0;
+            ShowOptionsTab(hDlg, sel);
+            return TRUE;
+        }
 
         // Handle tooltip notifications
         if (pnmh->code == TTN_GETDISPINFO) {

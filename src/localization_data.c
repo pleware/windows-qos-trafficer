@@ -528,6 +528,11 @@ const char * const lang_cli_en[_STR_COUNT] = {
     /*GUI_OPT_LOC_LANG_PL*/ "",
     /*GUI_OPT_LOC_LANG_UNK*/ "",
     /*GUI_RC_OPT_CHK_FAIR_SHARE*/ "",
+    /*GUI_RC_OPT_TAB_BANDWIDTH*/ "",
+    /*GUI_RC_OPT_TAB_NETWORK*/ "",
+    /*GUI_RC_OPT_TAB_QOS*/ "",
+    /*GUI_RC_OPT_TAB_GENERAL*/ "",
+    /*GUI_RC_OPT_QOS_DESC*/ "",
 };
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -1078,6 +1083,11 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     /*GUI_OPT_LOC_LANG_PL*/ L"Polish",
     /*GUI_OPT_LOC_LANG_UNK*/ L"Unknown",
     /*GUI_RC_OPT_CHK_FAIR_SHARE*/ L"Fair-share QoS",
+    /*GUI_RC_OPT_TAB_BANDWIDTH*/ L"Bandwidth",
+    /*GUI_RC_OPT_TAB_NETWORK*/ L"Network",
+    /*GUI_RC_OPT_TAB_QOS*/ L"QoS",
+    /*GUI_RC_OPT_TAB_GENERAL*/ L"General",
+    /*GUI_RC_OPT_QOS_DESC*/ L"No single program can monopolize the full bandwidth. Link capacity is auto-detected; a process using more than its fair share is capped to 70% of the link (download and upload).",
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1600,6 +1610,11 @@ const char * const lang_cli_hu[_STR_COUNT] = {
     /*GUI_OPT_LOC_LANG_PL*/ "",
     /*GUI_OPT_LOC_LANG_UNK*/ "",
     /*GUI_RC_OPT_CHK_FAIR_SHARE*/ "",
+    /*GUI_RC_OPT_TAB_BANDWIDTH*/ "",
+    /*GUI_RC_OPT_TAB_NETWORK*/ "",
+    /*GUI_RC_OPT_TAB_QOS*/ "",
+    /*GUI_RC_OPT_TAB_GENERAL*/ "",
+    /*GUI_RC_OPT_QOS_DESC*/ "",
 };
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -2154,6 +2169,11 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     /*GUI_OPT_LOC_LANG_PL*/ L"Lengyel",
     /*GUI_OPT_LOC_LANG_UNK*/ L"Ismeretlen",
     /*GUI_RC_OPT_CHK_FAIR_SHARE*/ L"Fair-share QoS",
+    /*GUI_RC_OPT_TAB_BANDWIDTH*/ L"Sávszélesség",
+    /*GUI_RC_OPT_TAB_NETWORK*/ L"Hálózat",
+    /*GUI_RC_OPT_TAB_QOS*/ L"QoS",
+    /*GUI_RC_OPT_TAB_GENERAL*/ L"Általános",
+    /*GUI_RC_OPT_QOS_DESC*/ L"Egyetlen program sem foglalhatja le a teljes sávszélességet. A kapcsolat kapacitása automatikusan felismerésre kerül; a tisztességes részesedésnél többet fogyasztó folyamat a sáv 70%-ára korlátozódik (letöltés és feltöltés).",
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -2676,6 +2696,11 @@ const char * const lang_cli_pl[_STR_COUNT] = {
     /*GUI_OPT_LOC_LANG_PL*/ "",
     /*GUI_OPT_LOC_LANG_UNK*/ "",
     /*GUI_RC_OPT_CHK_FAIR_SHARE*/ "",
+    /*GUI_RC_OPT_TAB_BANDWIDTH*/ "",
+    /*GUI_RC_OPT_TAB_NETWORK*/ "",
+    /*GUI_RC_OPT_TAB_QOS*/ "",
+    /*GUI_RC_OPT_TAB_GENERAL*/ "",
+    /*GUI_RC_OPT_QOS_DESC*/ "",
 };
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -3226,6 +3251,11 @@ const wchar_t * const lang_gui_pl[_STR_COUNT] = {
     /*GUI_OPT_LOC_LANG_PL*/ L"Polski",
     /*GUI_OPT_LOC_LANG_UNK*/ L"Nieznany",
     /*GUI_RC_OPT_CHK_FAIR_SHARE*/ L"Fair-share QoS",
+    /*GUI_RC_OPT_TAB_BANDWIDTH*/ L"Pasmo",
+    /*GUI_RC_OPT_TAB_NETWORK*/ L"Sieć",
+    /*GUI_RC_OPT_TAB_QOS*/ L"QoS",
+    /*GUI_RC_OPT_TAB_GENERAL*/ L"Ogólne",
+    /*GUI_RC_OPT_QOS_DESC*/ L"Żaden program nie może zmonopolizować całego pasma. Przepustowość łącza jest wykrywana automatycznie; proces zużywający ponad swój udział jest ograniczany do 70% łącza (pobieranie i wysyłanie).",
 };
 
 // ═══════════════════════════════════════════════════════════════════════════

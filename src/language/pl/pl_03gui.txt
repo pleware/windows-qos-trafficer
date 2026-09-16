@@ -308,3 +308,8 @@
 "Polski",
 "Nieznany",
 "Fair-share QoS",
+"Pasmo",
+"Sieć",
+"QoS",
+"Ogólne",
+"Żaden program nie może zmonopolizować całego pasma. Przepustowość łącza jest wykrywana automatycznie; proces zużywający ponad swój udział jest ograniczany do 70% łącza (pobieranie i wysyłanie).",

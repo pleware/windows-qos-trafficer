@@ -543,6 +543,11 @@ typedef enum {
     GUI_OPT_LOC_LANG_PL,
     GUI_OPT_LOC_LANG_UNK,
     GUI_RC_OPT_CHK_FAIR_SHARE,
+    GUI_RC_OPT_TAB_BANDWIDTH,
+    GUI_RC_OPT_TAB_NETWORK,
+    GUI_RC_OPT_TAB_QOS,
+    GUI_RC_OPT_TAB_GENERAL,
+    GUI_RC_OPT_QOS_DESC,
 
     // ----------------------------------------------------------------
     // Sentinel
