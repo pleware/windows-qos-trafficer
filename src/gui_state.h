@@ -47,6 +47,7 @@ typedef struct AppState {
     // Settings
     RateUnit current_unit;
     bool minimize_to_tray;
+    bool quitting;   // true only when the user explicitly exits (menu/tray Exit)
     bool options_window_open;
 
     // Options (persisted)

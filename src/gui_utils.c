@@ -1353,7 +1353,7 @@ void MinimizeToTray(void) {
 }
 
 void RestoreFromTray(void) {
-    ShowWindow(g_app.hMainWnd, SW_RESTORE);
+    ShowWindow(g_app.hMainWnd, SW_SHOWNORMAL);
     SetForegroundWindow(g_app.hMainWnd);
 }
 
@@ -2644,6 +2644,7 @@ BOOL onCommand(HWND hWnd, WPARAM wParam, LPARAM lParam) {
         return 0;
 
     case ID_FILE_EXIT:
+        g_app.quitting = true;
         PostMessage(hWnd, WM_CLOSE, 0, 0);
         return 0;
 
@@ -2816,6 +2817,7 @@ BOOL onCommand(HWND hWnd, WPARAM wParam, LPARAM lParam) {
         return 0;
 
     case ID_TRAY_EXIT:
+        g_app.quitting = true;
         PostMessage(hWnd, WM_CLOSE, 0, 0);
         return 0;
     }

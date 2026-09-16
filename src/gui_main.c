@@ -128,6 +128,10 @@ static LRESULT CALLBACK MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
         return 0;
 
     case WM_CLOSE:
+        if (g_app.minimize_to_tray && !g_app.quitting) {
+            MinimizeToTray();
+            return 0;
+        }
         return onClose(hWnd);
 
     case WM_DESTROY:
@@ -239,8 +243,12 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE hPrev, LPWSTR lpCmdLine, int nCmd
         return 1;
     }
 
-    ShowWindow(hWnd, nCmdShow);
-    UpdateWindow(hWnd);
+    // Start minimized to tray when the option is on (default), so no window
+    // flashes on startup. The tray icon is already added during onCreate.
+    if (!g_app.minimize_to_tray) {
+        ShowWindow(hWnd, nCmdShow);
+        UpdateWindow(hWnd);
+    }
 
 	// Local Accelerator Table for hotkeys
     ACCEL accel[] = {
