@@ -10,6 +10,7 @@
 typedef enum {
     LOC_LANG_EN = 0, // English (default)
     LOC_LANG_HU,     // Hungarian
+    LOC_LANG_PL,     // Polish
     //LOC_LANG_DE,     // German
     //LOC_LANG_FR,     // French
     _LOC_LANG_COUNT
@@ -539,6 +540,7 @@ typedef enum {
     // Language names
     GUI_OPT_LOC_LANG_EN,
     GUI_OPT_LOC_LANG_HU,
+    GUI_OPT_LOC_LANG_PL,
     GUI_OPT_LOC_LANG_UNK,
     GUI_RC_OPT_CHK_FAIR_SHARE,
 

@@ -30,6 +30,16 @@ void loc_set_language(LangId lang) {
             s_active_lang = LOC_LANG_HU;
             break;
 
+        case LOC_LANG_PL:
+            // These pointers come from localization_data.c
+            extern const char * const lang_cli_pl[]; 
+            extern const wchar_t * const lang_gui_pl[];
+
+            g_cli_strings = lang_cli_pl;
+            g_gui_strings = lang_gui_pl;
+            s_active_lang = LOC_LANG_PL;
+            break;
+
         // Add cases for DE, FR, etc. here. 
         // e.g. case LOC_LANG_DE: { ... } break;
 
@@ -52,6 +62,7 @@ const wchar_t *loc_language_name(LangId lang) {
     switch (lang) {
         case LOC_LANG_EN: return T(GUI_OPT_LOC_LANG_EN);
         case LOC_LANG_HU: return T(GUI_OPT_LOC_LANG_HU);
+        case LOC_LANG_PL: return T(GUI_OPT_LOC_LANG_PL);
         default:          return T(GUI_OPT_LOC_LANG_UNK);
     }
 }

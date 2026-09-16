@@ -249,6 +249,8 @@ bool parse_args(int argc, char **argv, ParsedArgs *args) {
                 loc_set_language(LOC_LANG_EN);
             } else if (_stricmp(argv[i], "hu") == 0 || _stricmp(argv[i], "hungarian") == 0) {
                 loc_set_language(LOC_LANG_HU);
+            } else if (_stricmp(argv[i], "pl") == 0 || _stricmp(argv[i], "polish") == 0 || _stricmp(argv[i], "polski") == 0) {
+                loc_set_language(LOC_LANG_PL);
             } else {
                 fprintf(stderr, C(CLI_ERR_UNKNOWN_ARG), argv[i]);
                 print_help(argv[0]);

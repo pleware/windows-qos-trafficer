@@ -202,7 +202,7 @@
 "  -l, --lang <en|...>                           "
 "Az interfész nyelv átállítása (alapé.: en)\n"
 "                                                  "
-"Elérhető nyelvek: en, hu\n",
+"Elérhető nyelvek: en, pl, hu\n",
 "  -P, --priority <NUM>                          "
 "A WinDivert prioritás beállítása (alapé.: 0, érték lehet: %d-%d)\n",
 "  -p, --process <folyamat1,folyamat2,...>       "

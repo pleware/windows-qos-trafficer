@@ -305,5 +305,6 @@
 
 "English",
 "Hungarian",
+"Polish",
 "Unknown",
 "Fair-share QoS",

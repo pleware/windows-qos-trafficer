@@ -202,7 +202,7 @@
 "  -l, --lang <en|...>                           "
 "Set interface language (default: en)\n"
 "                                                  "
-"Available languages: en, hu\n",
+"Available languages: en, pl, hu\n",
 "  -P, --priority <NUM>                          "
 "Set WinDivert priority (default: 0, range: %d to %d)\n",
 "  -p, --process <process1,process2,...>         "

@@ -1,0 +1,310 @@
+"Nie udało się zainicjować COM",
+"Ten program wymaga uprawnień administratora.\n\n"
+"Czy chcesz spróbować go podnieść?",
+"Wymagane uprawnienia administratora",
+"Nie udało się uzyskać uprawnień administratora.\n"
+"Program zostanie teraz zamknięty.",
+"Nie udało się zarejestrować klasy okna",
+"Nie udało się utworzyć okna",
+
+"Proces",
+"PID",
+"Pobieranie",
+"Wysyłanie",
+"Limit DL",
+"Limit UL",
+"Limit wejściowy",
+"Limit wyjściowy",
+"Harmonogram",
+"Akcje",
+"Ostrzeżenie: proces ma więcej niż %u instancji, część pominięto\n",
+"%d procesów (%d instancji)",
+"Ustaw limit",
+"Limity można ustawić tylko na poziomie grupy procesów, nie pojedynczych PID.",
+"Pliki wykonywalne (*.exe)\0*.exe\0Wszystkie pliki (*.*)\0*.*\0",
+"Znajdź plik wykonywalny procesu",
+"Znajdź proces",
+"Lista trwałych procesów jest pełna (maks. %d).",
+"Dodano wpis trwały: %s",
+"Określ proces",
+"Usuń wpis trwały",
+"Wybrany proces nie jest wpisem trwałym.\n\n"
+"Kliknij prawym przyciskiem uruchomiony proces i wybierz \x201EPrzypnij jako trwały \u25CC\x201D "
+"aby go utrwalić, lub użyj Plik \x203A Znajdź / Określ proces.",
+"Usunąć wpis trwały dla \"%s\"?\n\n"
+"Zapisane limity zostaną odrzucone. "
+"Jeśli proces działa, pozostanie na liście do zamknięcia.",
+"Sortuj wg %s (%s)",
+"rosnąco",
+"malejąco",
+"%d inst.",
+"Zablokowany",
+"[Ograniczony]",
+"Ustaw limit pobierania...",
+"Ustaw limit wysyłania...",
+"Usuń limity",
+"Zablokuj proces",
+"Ustaw limit wejściowy...",
+"Ustaw limit wyjściowy...",
+"Usuń limity danych",
+"Ustaw harmonogram...",
+"Usuń harmonogram",
+"Zwiń PID",
+"Rozwiń PID",
+"Usuń wpis trwały",
+"Przypnij jako trwały %s",
+"Nieprawidłowe dane",
+"Wartość limitu zbyt duża (maks. 1 PB)",
+
+"Start",
+"Stop",
+"Przeładuj",
+"Gotowy",
+"Wymagana konfiguracja",
+"Nie wybrano interfejsu sieciowego.\n\n"
+"Przejdź do Widok > Opcje i wybierz co najmniej jeden interfejs sieciowy.",
+"Nie udało się utworzyć instancji shapera",
+"Nie udało się uruchomić shapera: %s",
+"\r\n*** PROCESY Z WYCZERPANYM LIMITEM ***\r\n",
+" (IN)",
+" (OUT)",
+"--- Sesja zakończona (statystyki zamrożone) ---\r\n"
+"Przetworzone pakiety:  %llu\r\n"
+"Odrzucone (limit):     %llu\r\n"
+"Odrzucone (utrata):     %llu\r\n"
+"Opóźnione:            %llu\r\n"
+"Nieprawidłowe:        %llu\r\n"
+"\r\n"
+"Łącznie bajty:        %llu (%.2f MB)\r\n"
+"Pobrane bajty:     %llu (%.2f MB)\r\n"
+"Wysłane bajty:       %llu (%.2f MB)\r\n"
+"%s%s%s",
+"\r\n*** OSIĄGNIĘTO LIMIT DANYCH ***",
+"Ukryj",
+"Pokaż",
+"Statystyki",
+"Zamknij",
+"Nie znaleziono zapisanego interfejsu: '%s' - sprawdź Opcje",
+"Brak IP",
+"O programie",
+"Windows QoS Trafficer %s\nZaawansowany shaper ruchu\n\nAutor: niltwill\nhttps://github.com/pleware/windows-qos-trafficer",
+"Shaper działa",
+"Zatrzymany",
+"Konfiguracja przeładowana",
+"Konfiguracja przeładowana (fallback)",
+"Przeładowanie nie powiodło się: %s",
+"Błąd przeładowania",
+
+"Maksymalna łączna przepustowość przychodząca dla wszystkich procesów.\n"
+"0 = brak limitu globalnego (limity per-proces nadal obowiązują).",
+"Maksymalna łączna przepustowość wychodząca dla wszystkich procesów.\n"
+"0 = brak limitu globalnego (limity per-proces nadal obowiązują).",
+"Rozmiar wewnętrznego bufora pakietów dla ruchu przychodzącego, w bajtach.\n"
+"Większe wartości wygładzają ruch impulsowy, ale zwiększają zużycie pamięci.\n"
+"Typowy zakres: 65536 - 524288.",
+"Rozmiar wewnętrznego bufora pakietów dla ruchu wychodzącego, w bajtach.\n"
+"Większe wartości wygładzają ruch impulsowy, ale zwiększają zużycie pamięci.\n"
+"Typowy zakres: 65536 - 524288.",
+"Maksymalna liczba bajtów, którą proces może wysłać w jednym burst, zanim zacznie się ograniczanie.\n"
+"0 = wybierane automatycznie na podstawie aktywnego limitu.\n"
+"Zwiększ, jeśli ograniczone połączenia wydają się opóźnione;\n"
+"zmniejsz, aby wymusić ściślejsze tempo.",
+"Jak często shaper ponownie ocenia ruch i stosuje limity.\n"
+"Tryb Pakiety: wyzwalaj po tylu pakietach.\n"
+"Tryb Milisekundy: wyzwalaj co tyle ms.\n"
+"Niżej = większa responsywność, ale wyższe zużycie CPU.",
+"Wyzwalaj aktualizację ruchu po ustalonej liczbie pakietów.\n"
+"Dobre dla połączeń o wysokiej liczbie pakietów (gry, VoIP).",
+"Wyzwalaj aktualizację ruchu w stałym interwale czasowym.\n"
+"Dobre dla transferów masowych (pobieranie, streaming).",
+"Minimalny czas w milisekundach między dwiema kolejnymi "
+"aktualizacjami ruchu, niezależnie od powyższego interwału. "
+"Zapobiega thrashowaniu, gdy wiele małych pakietów dociera naraz.",
+"Limit danych całej sesji w megabajtach. Gdy łączny ruch (in + out)\n"
+"przekroczy tę wartość, shaper blokuje cały dalszy ruch.\n"
+"0 = brak limitu. Zeruje się po zatrzymaniu i ponownym uruchomieniu shapera.",
+"Maksymalna liczba jednoczesnych połączeń TCP dozwolonych na proces. "
+"Nowe połączenia ponad limit są odrzucane.\n"
+"0 = brak limitu połączeń.",
+"Maksymalna liczba jednoczesnych przepływów UDP dozwolonych na proces. "
+"Nowe przepływy ponad limit są odrzucane.\n"
+"0 = brak limitu przepływów.",
+"Sztuczne opóźnienie dodawane do każdego pakietu, w milisekundach.\n"
+"Przydatne do testowania zachowania aplikacji w warunkach wysokiego opóźnienia.\n"
+"0 = brak dodatkowego opóźnienia.",
+"Procent pakietów odrzucanych losowo (0.00 - 100.00).\n"
+"Symuluje zawodne łącze sieciowe.\n"
+"0 = brak utraty pakietów.",
+"Priorytet ustawiony dla samego WinDivert (-30000 najniższy do 30000 najwyższy). "
+"Wartości ujemne depriorytetyzują ruch; dodatnie go priorytetyzują.\n"
+"-30000 = najniższy, -15000 = niski, 0 = normalny,\n"
+"15000 = wysoki, 30000 = najwyższy.",
+"Wybierz jeden lub więcej adapterów sieciowych do monitorowania i kształtowania.\n"
+"Lista jest wyłączona, gdy shaper działa.",
+"Gdy zminimalizowane, ukryj okno i pokaż tylko ikonę w zasobniku systemowym. "
+"Kliknij dwukrotnie ikonę, aby przywrócić.",
+"Zapisz wszystkie bieżące wartości Opcji do WindowsQoSTrafficer.cfg\n"
+"przy zamknięciu programu i wczytaj je przy następnym uruchomieniu.",
+"Zapisz listę trwałych procesów (przypięte procesy i ich limity)\n"
+"do WindowsQoSTrafficer.cfg przy zamknięciu i przywróć je przy następnym uruchomieniu.\n"
+"Wymaga też zaznaczenia 'Zapamiętaj ustawienia przy zamknięciu'.",
+"Zapisz plik konfiguracyjny w tej lokalizacji przy zamknięciu programu,\n"
+"i wczytaj go z tej ścieżki przy następnym uruchomieniu.",
+"Zapisuj migawki ze statystyk w tej lokalizacji,\n"
+"zamiast w tym samym katalogu co plik EXE.",
+"Zmień język programu.",
+"Nie udało się przeładować konfiguracji: %s",
+"Wybierz folder pliku konfiguracyjnego (WindowsQoSTrafficer.cfg):",
+"Wybierz folder eksportu migawek CSV:",
+"Dane wejściowe",
+"Dane wyjściowe",
+"Zapisz statystyki",
+"Przetworzone pakiety:  %I64u\r\n"
+"Odrzucone (limit):     %I64u\r\n"
+"Odrzucone (utrata):     %I64u\r\n"
+"Opóźnione:            %I64u\r\n"
+"Nieprawidłowe:        %I64u\r\n"
+"\r\n"
+"Łącznie bajty:        %I64u (%.2f MB)\r\n"
+"Pobrane bajty:     %I64u (%.2f MB)\r\n"
+"Wysłane bajty:       %I64u (%.2f MB)\r\n"
+"\r\n"
+"Bieżąca prędkość:    %.2f / %.2f KB/s\r\n"
+"%s%s%s",
+"Podaj nazwę procesu.",
+"(brak harmonogramu - reguły zawsze aktywne)",
+"Harmonogram - %s",
+"Czas",
+"(24h)",
+"Dzień tygodnia",
+"Pon",
+"Wt",
+"Śr",
+"Czw",
+"Pt",
+"Sob",
+"Niedz",
+"Poza harmonogramem wszystkie reguły dla tego procesu są zawieszone.",
+"Resetuj",
+"OK",
+"Anuluj",
+"Nieprawidłowy harmonogram",
+"Czas rozpoczęcia i zakończenia są identyczne.\n"
+"Podaj prawidłowy zakres czasu lub odznacz opcję Czas.",
+"Nie wybrano żadnego dnia tygodnia.\n"
+"Wybierz co najmniej jeden dzień lub odznacz opcję Dzień tygodnia.",
+"Nie udało się utworzyć pliku CSV.\n"
+"Upewnij się, że aplikacja ma uprawnienia zapisu do swojego katalogu.",
+"Eksport statystyk Windows QoS Trafficer\n",
+"Wygenerowano,%04u-%02u-%02u %02u:%02u:%02u\n\n",
+"Ruch per-proces\n",
+"Proces,Opis,Dane wejściowe (MB),Dane wyjściowe (MB),Łącznie (MB),Limit wejściowy (MB),Limit wyjściowy (MB),Limit wyczerpany\n",
+"TAK",
+"NIE",
+"(brak zarejestrowanego ruchu)\n",
+"Podsumowanie sesji\n",
+"Przetworzone pakiety,%llu\n",
+"Odrzucone (limit prędkości),%llu\n",
+"Odrzucone (symulacja utraty),%llu\n",
+"Opóźnione,%llu\n",
+"Nieprawidłowe pakiety,%llu\n",
+"Łącznie przetworzone bajty,%llu\n",
+"Łącznie przetworzone bajty (MB),%.3f\n",
+"Pobrane bajty (MB),%.3f\n",
+"Wysłane bajty (MB),%.3f\n",
+"Osiągnięto limit danych,TAK\n",
+"\nProcesy z wyczerpanym limitem\n",
+"Proces,Typ limitu,Limit (MB),Zużyto (MB)\n",
+"\"%s\",IN,%.3f,%.3f\n",
+"\"%s\",OUT,%.3f,%.3f\n",
+"(shaper jeszcze nie zatrzymany - brak podsumowania końcowego)\n",
+"Statystyki zapisane do:\n%s",
+
+"&Plik",
+"&Znajdź proces...\t(Alt+L)",
+"&Określ proces...\t(Alt+P)",
+"&Usuń wpis trwały\t(Alt+R)",
+"Za&kończ\t(Alt+F4)",
+"&Widok",
+"&Odśwież procesy\t(F5)",
+"&Rozwiń wszystkie\t(Alt++)",
+"&Zwiń wszystkie\t(Alt+-)",
+"&Częstotliwość aktualizacji",
+"&Często (1 s)",
+"&Normalnie (2 s)",
+"&Wolniej (15 s)",
+"&Rzadko (45 s)",
+"&Bardzo rzadko (2 min)",
+"&Wyłączone",
+"&Procesy",
+"Pokaż &wszystkie\t(Alt+A)",
+"Pokaż tylko &trwałe\t(Alt+S)",
+"Pokaż tylko &uruchomione\t(Alt+C)",
+"&Opcje\t(Ctrl+O)",
+"&Statystyki\t(Ctrl+S)",
+"&Pomoc",
+"&O programie",
+
+"Opcje",
+"Globalne limity przepustowości",
+"Pobieranie:",
+"KB/s (0 = bez limitu)",
+"Wysyłanie:",
+"KB/s (0 = bez limitu)",
+"Limit danych:",
+"MB (0 = bez limitu)",
+"Interfejsy sieciowe",
+"Wybrane interfejsy:",
+"Ustawienia bufora",
+"Bufor pobierania:",
+"bajty",
+"Bufor wysyłania:",
+"Rozmiar burst:",
+"bajty (0 = auto)",
+"Interwał aktualizacji procesów",
+"Aktualizuj co:",
+"Pakiety",
+"Milisekundy",
+"Cooldown:",
+"ms",
+"Zaawansowane",
+"Limit połączeń TCP:",
+"(0 = bez limitu)",
+"Limit połączeń UDP:",
+"(0 = bez limitu)",
+"Opóźnienie:",
+"Utrata pakietów:",
+"%",
+"Priorytet:",
+"Język",
+"Bieżący język:",
+"Zachowanie",
+"Minimalizuj do zasobnika",
+"Zapamiętaj ustawienia przy zamknięciu",
+"Zapamiętaj trwałe procesy przy zamknięciu",
+"Ścieżki plików",
+"Folder konfiguracji:",
+"(pusty = ten sam folder co plik wykonywalny)",
+"Folder migawek:",
+"(pusty = ten sam folder co plik wykonywalny)",
+"OK",
+"Anuluj",
+
+"Określ proces",
+"Nazwa procesu (bez .exe):",
+"Dodaj",
+
+"Statystyki - Windows QoS Trafficer",
+"Historia pobierania",
+"Historia wysyłania",
+"Ruch per-proces",
+"Statystyki:",
+"&Zapisz statystyki",
+"&Resetuj statystyki",
+"&Zamknij",
+
+"Angielski",
+"Węgierski",
+"Polski",
+"Nieznany",
+"Fair-share QoS",
