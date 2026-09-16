@@ -288,7 +288,7 @@ const char * const lang_cli_en[_STR_COUNT] = {
     /*CLI_HELP_HELP*/ "  -h, --help                                    "
     "Display this help and exit\n",
     /*CLI_HELP_FAIR_SHARE*/ "  -F, --fair-share                             "
-    "Auto-cap a single process hogging the link (fair-share QoS)\n",
+    "Auto-cap a single process hogging the link (fair-share QoS; on by default)\n",
     /*CLI_QOS_ENABLED*/ "Fair-share QoS: enabled (auto-detect capacity, %d%% cap per process)\n",
     /*CLI_QOS_CAP_DL*/ "QoS: capping PID %u download to %.1f KB/s\n",
     /*CLI_QOS_CAP_UL*/ "QoS: capping PID %u upload to %.1f KB/s\n",
@@ -1360,7 +1360,7 @@ const char * const lang_cli_hu[_STR_COUNT] = {
     /*CLI_HELP_HELP*/ "  -h, --help                                    "
     "Eme súgó kiírása és kilépés\n",
     /*CLI_HELP_FAIR_SHARE*/ "  -F, --fair-share                             "
-    "Fair-share QoS: egyetlen folyamat se foglalhassa le a teljes sávszélességet\n",
+    "Fair-share QoS: egyetlen folyamat se foglalhassa le a teljes sávszélességet (alapértelmezés szerint bekapcsolva)\n",
     /*CLI_QOS_ENABLED*/ "Fair-share QoS: engedélyezve (automatikus érzékelés, %d%% korlát folyamatonként)\n",
     /*CLI_QOS_CAP_DL*/ "QoS: %u PID letöltési korlátozása %.1f KB/s-ra\n",
     /*CLI_QOS_CAP_UL*/ "QoS: %u PID feltöltési korlátozása %.1f KB/s-ra\n",
@@ -2436,7 +2436,7 @@ const char * const lang_cli_pl[_STR_COUNT] = {
     /*CLI_HELP_HELP*/ "  -h, --help                                    "
     "Wyświetl tę pomoc i zakończ\n",
     /*CLI_HELP_FAIR_SHARE*/ "  -F, --fair-share                             "
-    "Automatycznie ogranicz pojedynczy proces zajmujący łącze (fair-share QoS)\n",
+    "Automatycznie ogranicz pojedynczy proces zajmujący łącze (fair-share QoS; domyślnie włączony)\n",
     /*CLI_QOS_ENABLED*/ "Fair-share QoS: włączony (auto-detekcja przepustowości, limit %d%% na proces)\n",
     /*CLI_QOS_CAP_DL*/ "QoS: ograniczam PID %u pobieranie do %.1f KB/s\n",
     /*CLI_QOS_CAP_UL*/ "QoS: ograniczam PID %u wysyłanie do %.1f KB/s\n",

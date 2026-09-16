@@ -19,6 +19,7 @@ void parsed_args_init(ParsedArgs *args) {
     args->process.last_update_time = clock();
     args->quota_check_interval_ms = QUOTA_CHECK_INTERVAL;
     args->stats_interval_ms = STATS_UPDATE_INTERVAL;
+    args->qos_fair_share = true;
 }
 
 void parsed_args_free(ParsedArgs *args) {
@@ -499,6 +500,9 @@ static bool apply_config_value(const char *key, const char *value,
         if (strcmp(value, "true") == 0 || strcmp(value, "1") == 0 ||
             strcmp(value, "yes")  == 0 || strcmp(value, "on") == 0)
             args->qos_fair_share = true;
+        else if (strcmp(value, "false") == 0 || strcmp(value, "0") == 0 ||
+                 strcmp(value, "no")  == 0 || strcmp(value, "off") == 0)
+            args->qos_fair_share = false;
         return true;
     }
     if (strcmp(key, "list-nics") == 0 || strcmp(key, "list_nics") == 0) {

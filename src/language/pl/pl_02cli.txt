@@ -260,7 +260,7 @@
 "  -h, --help                                    "
 "Wyświetl tę pomoc i zakończ\n",
 "  -F, --fair-share                             "
-"Automatycznie ogranicz pojedynczy proces zajmujący łącze (fair-share QoS)\n",
+"Automatycznie ogranicz pojedynczy proces zajmujący łącze (fair-share QoS; domyślnie włączony)\n",
 "Fair-share QoS: włączony (auto-detekcja przepustowości, limit %d%% na proces)\n",
 "QoS: ograniczam PID %u pobieranie do %.1f KB/s\n",
 "QoS: ograniczam PID %u wysyłanie do %.1f KB/s\n",

@@ -1704,8 +1704,8 @@ void Settings_Load(void) {
     GetPrivateProfileStringW(S, L"MinimizeToTray", L"1", buf, 2, path);
     g_app.minimize_to_tray = (buf[0] != L'0');
 
-    GetPrivateProfileStringW(S, L"FairShare", L"0", buf, 2, path);
-    g_app.options.qos_fair_share = (buf[0] == L'1');
+    GetPrivateProfileStringW(S, L"FairShare", L"1", buf, 2, path);
+    g_app.options.qos_fair_share = (buf[0] != L'0');
 
     GetPrivateProfileStringW(S, L"DisplayUnit", L"-1", buf, 4, path);
     {
@@ -2784,6 +2784,7 @@ LRESULT onCreate(HWND hWnd) {
     g_app.minimize_to_tray = true;
     g_app.options.save_settings = false;
     g_app.options.save_sticky_settings = false;
+    g_app.options.qos_fair_share = true;
 
     g_app.freq_idx = FREQ_DEFAULT_IDX;    // Default: Normal (2s)
     g_app.proc_filter = PROC_FILTER_ALL;  // Default: Show All

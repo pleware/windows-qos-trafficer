@@ -260,7 +260,7 @@
 "  -h, --help                                    "
 "Eme súgó kiírása és kilépés\n",
 "  -F, --fair-share                             "
-"Fair-share QoS: egyetlen folyamat se foglalhassa le a teljes sávszélességet\n",
+"Fair-share QoS: egyetlen folyamat se foglalhassa le a teljes sávszélességet (alapértelmezés szerint bekapcsolva)\n",
 "Fair-share QoS: engedélyezve (automatikus érzékelés, %d%% korlát folyamatonként)\n",
 "QoS: %u PID letöltési korlátozása %.1f KB/s-ra\n",
 "QoS: %u PID feltöltési korlátozása %.1f KB/s-ra\n",
