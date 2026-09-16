@@ -181,12 +181,17 @@ bool StartShaper(void) {
     int nicCount = 0;
 
     if (g_app.options.all_nics) {
-        unsigned int *valid = NULL;
-        unsigned int validCount = 0;
-        if (get_valid_nic_indices(&valid, &validCount)) {
-            for (unsigned int i = 0; i < validCount && nicCount < 8; i++)
-                nicIndices[nicCount++] = valid[i];
-            free(valid);
+        // Enumerate every adapter via the same source the NIC list uses
+        // (GetAdaptersInfo) and shape all of them.
+        ULONG bufLen = 0;
+        GetAdaptersInfo(NULL, &bufLen);
+        if (bufLen > 0) {
+            IP_ADAPTER_INFO *pAdapters = (IP_ADAPTER_INFO *)malloc(bufLen);
+            if (pAdapters && GetAdaptersInfo(pAdapters, &bufLen) == NO_ERROR) {
+                for (IP_ADAPTER_INFO *p = pAdapters; p && nicCount < 8; p = p->Next)
+                    nicIndices[nicCount++] = p->Index;
+            }
+            free(pAdapters);
         }
     } else if (wcslen(g_app.options.selected_nics) > 0) {
         wchar_t temp[256];
