@@ -533,6 +533,7 @@ const char * const lang_cli_en[_STR_COUNT] = {
     /*GUI_RC_OPT_TAB_QOS*/ "",
     /*GUI_RC_OPT_TAB_GENERAL*/ "",
     /*GUI_RC_OPT_QOS_DESC*/ "",
+    /*GUI_RC_OPT_CHK_ALL_NICS*/ "",
 };
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -1088,6 +1089,7 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     /*GUI_RC_OPT_TAB_QOS*/ L"QoS",
     /*GUI_RC_OPT_TAB_GENERAL*/ L"General",
     /*GUI_RC_OPT_QOS_DESC*/ L"No single program can monopolize the full bandwidth. Link capacity is auto-detected; a process using more than its fair share is capped to 70% of the link (download and upload).",
+    /*GUI_RC_OPT_CHK_ALL_NICS*/ L"All interfaces",
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1615,6 +1617,7 @@ const char * const lang_cli_hu[_STR_COUNT] = {
     /*GUI_RC_OPT_TAB_QOS*/ "",
     /*GUI_RC_OPT_TAB_GENERAL*/ "",
     /*GUI_RC_OPT_QOS_DESC*/ "",
+    /*GUI_RC_OPT_CHK_ALL_NICS*/ "",
 };
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -2174,6 +2177,7 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     /*GUI_RC_OPT_TAB_QOS*/ L"QoS",
     /*GUI_RC_OPT_TAB_GENERAL*/ L"Általános",
     /*GUI_RC_OPT_QOS_DESC*/ L"Egyetlen program sem foglalhatja le a teljes sávszélességet. A kapcsolat kapacitása automatikusan felismerésre kerül; a tisztességes részesedésnél többet fogyasztó folyamat a sáv 70%-ára korlátozódik (letöltés és feltöltés).",
+    /*GUI_RC_OPT_CHK_ALL_NICS*/ L"Összes interfész",
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -2701,6 +2705,7 @@ const char * const lang_cli_pl[_STR_COUNT] = {
     /*GUI_RC_OPT_TAB_QOS*/ "",
     /*GUI_RC_OPT_TAB_GENERAL*/ "",
     /*GUI_RC_OPT_QOS_DESC*/ "",
+    /*GUI_RC_OPT_CHK_ALL_NICS*/ "",
 };
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -3256,6 +3261,7 @@ const wchar_t * const lang_gui_pl[_STR_COUNT] = {
     /*GUI_RC_OPT_TAB_QOS*/ L"QoS",
     /*GUI_RC_OPT_TAB_GENERAL*/ L"Ogólne",
     /*GUI_RC_OPT_QOS_DESC*/ L"Żaden program nie może zmonopolizować całego pasma. Przepustowość łącza jest wykrywana automatycznie; proces zużywający ponad swój udział jest ograniczany do 70% łącza (pobieranie i wysyłanie).",
+    /*GUI_RC_OPT_CHK_ALL_NICS*/ L"Wszystkie interfejsy",
 };
 
 // ═══════════════════════════════════════════════════════════════════════════

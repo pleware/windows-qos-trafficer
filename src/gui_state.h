@@ -67,6 +67,7 @@ typedef struct AppState {
         double global_dl_limit;
         double global_ul_limit;
         wchar_t selected_nics[256];
+        bool all_nics;
         bool save_settings;
         bool save_sticky_settings;
         bool qos_fair_share;

@@ -548,6 +548,7 @@ typedef enum {
     GUI_RC_OPT_TAB_QOS,
     GUI_RC_OPT_TAB_GENERAL,
     GUI_RC_OPT_QOS_DESC,
+    GUI_RC_OPT_CHK_ALL_NICS,
 
     // ----------------------------------------------------------------
     // Sentinel

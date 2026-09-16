@@ -79,7 +79,7 @@ static const int g_opt_tab_bandwidth[] = {
     IDC_OPT_LBL_BURST_SIZE, IDC_OPT_BURST_SIZE, IDC_OPT_LBL_BURST_AUTO,
 };
 static const int g_opt_tab_network[] = {
-    IDC_OPT_GRP_NIC_INTERFACES, IDC_OPT_LBL_NIC_SELECTED, IDC_OPT_NIC_LIST,
+    IDC_OPT_GRP_NIC_INTERFACES, IDC_OPT_LBL_NIC_SELECTED, IDC_OPT_NIC_ALL, IDC_OPT_NIC_LIST,
     IDC_OPT_GRP_ADVANCED, IDC_OPT_LBL_TCP_LIMIT, IDC_OPT_TCP_LIMIT, IDC_OPT_LBL_TCP_UNLIM,
     IDC_OPT_LBL_UDP_LIMIT, IDC_OPT_UDP_LIMIT, IDC_OPT_LBL_UDP_UNLIM,
     IDC_OPT_LBL_LATENCY, IDC_OPT_LATENCY, IDC_OPT_LBL_MS2,
@@ -132,6 +132,7 @@ void RefreshOptionsDlgStrings(HWND hDlg) {
     SetDlgItemTextW(hDlg, IDC_OPT_LBL_DATA_CAP_UNLIM, T(GUI_RC_OPT_LBL_DATA_CAP_UNLIM));
     SetDlgItemTextW(hDlg, IDC_OPT_GRP_NIC_INTERFACES, T(GUI_RC_OPT_GRP_NIC_INTERFACES));
     SetDlgItemTextW(hDlg, IDC_OPT_LBL_NIC_SELECTED, T(GUI_RC_OPT_LBL_NIC_SELECTED));
+    SetDlgItemTextW(hDlg, IDC_OPT_NIC_ALL, T(GUI_RC_OPT_CHK_ALL_NICS));
     SetDlgItemTextW(hDlg, IDC_OPT_GRP_BUFFER_SETTINGS, T(GUI_RC_OPT_GRP_BUFFER_SETTINGS));
     SetDlgItemTextW(hDlg, IDC_OPT_LBL_DL_BUFFER, T(GUI_RC_OPT_LBL_DL_BUFFER));
     SetDlgItemTextW(hDlg, IDC_OPT_LBL_BYTES, T(GUI_RC_OPT_LBL_BYTES));
@@ -425,11 +426,14 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
             }
         }
 
-        // Lock the list if shaper is running
-        if (g_app.shaper != NULL && shaper_is_running(g_app.shaper)) {
-            EnableWindow(hList, FALSE);
-        } else {
-            EnableWindow(hList, TRUE);
+        // "All interfaces" checkbox + lock the list when the shaper is running
+        // or when "All" is selected (individual selection is then irrelevant).
+        CheckDlgButton(hDlg, IDC_OPT_NIC_ALL,
+                       g_app.options.all_nics ? BST_CHECKED : BST_UNCHECKED);
+        {
+            bool all = g_app.options.all_nics;
+            bool running = (g_app.shaper != NULL && shaper_is_running(g_app.shaper));
+            EnableWindow(hList, !all && !running);
         }
 
         // Resize OK / Cancel to fit translated text, keeping them right-aligned
@@ -641,6 +645,9 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
             g_app.options.save_settings =
                 IsDlgButtonChecked(hDlg, IDC_OPT_SAVE_SETTINGS) == BST_CHECKED;
 
+            g_app.options.all_nics =
+                IsDlgButtonChecked(hDlg, IDC_OPT_NIC_ALL) == BST_CHECKED;
+
             // Settings_Save handles all cases: full save when save_settings
             // is on, redirect-only when a custom dir is set but save_settings
             // is off, and cleanup (DeleteFile) when neither applies.
@@ -688,6 +695,15 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
                 ApplyLanguageChange(NULL);
             }
             EndDialog(hDlg, IDCANCEL);
+            return TRUE;
+
+        case IDC_OPT_NIC_ALL:
+            if (HIWORD(wParam) == BN_CLICKED) {
+                bool all = IsDlgButtonChecked(hDlg, IDC_OPT_NIC_ALL) == BST_CHECKED;
+                HWND hList = GetDlgItem(hDlg, IDC_OPT_NIC_LIST);
+                bool running = (g_app.shaper != NULL && shaper_is_running(g_app.shaper));
+                if (hList) EnableWindow(hList, !all && !running);
+            }
             return TRUE;
 
         case IDC_OPT_LANGUAGE:

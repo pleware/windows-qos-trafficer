@@ -175,8 +175,32 @@ void CreateStatusBar(HWND hWnd) {
 bool StartShaper(void) {
     if (g_app.shaper) return false;
 
-    // Check if any NIC is selected
-    if (g_app.options.selected_nics[0] == L'\0') {
+    // Build the NIC list: either every operational NIC ("All"), or the NICs
+    // selected in Options.
+    unsigned int nicIndices[8] = {0};
+    int nicCount = 0;
+
+    if (g_app.options.all_nics) {
+        unsigned int *valid = NULL;
+        unsigned int validCount = 0;
+        if (get_valid_nic_indices(&valid, &validCount)) {
+            for (unsigned int i = 0; i < validCount && nicCount < 8; i++)
+                nicIndices[nicCount++] = valid[i];
+            free(valid);
+        }
+    } else if (wcslen(g_app.options.selected_nics) > 0) {
+        wchar_t temp[256];
+        wcscpy(temp, g_app.options.selected_nics);
+        wchar_t* context = NULL;
+        wchar_t* token = wcstok_s(temp, L",", &context);
+
+        while (token != NULL && nicCount < 8) {
+            nicIndices[nicCount++] = (unsigned int)_wtoi(token);
+            token = wcstok_s(NULL, L",", &context);
+        }
+    }
+
+    if (nicCount == 0) {
         MSGBOX(g_app.hMainWnd,
             T(GUI_OPT_NO_NIC_MSG),
             T(GUI_OPT_NO_NIC_CAP),
@@ -188,22 +212,6 @@ bool StartShaper(void) {
     if (!g_app.shaper) {
         MSGBOX(g_app.hMainWnd, T(GUI_ERR_SHAPER_ALLOC), T(S_ERROR), MB_OK);
         return false;
-    }
-
-    // Parse selected NICs from options
-    unsigned int nicIndices[8] = {0};
-    int nicCount = 0;
-
-    if (wcslen(g_app.options.selected_nics) > 0) {
-        wchar_t temp[256];
-        wcscpy(temp, g_app.options.selected_nics);
-        wchar_t* context = NULL;
-        wchar_t* token = wcstok_s(temp, L",", &context);
-
-        while (token != NULL && nicCount < 8) {
-            nicIndices[nicCount++] = (unsigned int)_wtoi(token);
-            token = wcstok_s(NULL, L",", &context);
-        }
     }
 
     double dlLimits[8], ulLimits[8];
@@ -1563,6 +1571,8 @@ void Settings_Save(void) {
         }
         WritePrivateProfileStringW(S, L"SelectedNICs", desc_list, auth_path);
     }
+    WritePrivateProfileStringW(S, L"AllNICs",
+                               g_app.options.all_nics ? L"1" : L"0", auth_path);
 
     // Buffer / burst
     swprintf(buf, 512, L"%u", g_app.options.dl_buffer);
@@ -1749,6 +1759,10 @@ void Settings_Load(void) {
 
         free(pAdapters);
     }
+
+    // All-NICs toggle
+    GetPrivateProfileStringW(S, L"AllNICs", L"0", buf, 2, path);
+    g_app.options.all_nics = (buf[0] == L'1');
 
     // Buffer / burst
     GetPrivateProfileStringW(S, L"DLBuffer", L"0", buf, 32, path);
