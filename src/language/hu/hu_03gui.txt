@@ -318,3 +318,4 @@
 "Általános",
 "Egyetlen program sem foglalhatja le a teljes sávszélességet. A kapcsolat kapacitása automatikusan felismerésre kerül; a tisztességes részesedésnél többet fogyasztó folyamat a sáv 70%-ára korlátozódik (letöltés és feltöltés).",
 "Összes interfész",
+"Forgalomformálás automatikus indítása",

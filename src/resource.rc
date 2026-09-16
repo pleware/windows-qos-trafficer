@@ -146,6 +146,8 @@ BEGIN
             BS_AUTOCHECKBOX | WS_TABSTOP, 24, 204, 240, 10
     CONTROL "Remember sticky processes on exit", IDC_OPT_SAVE_STICKY_SETTINGS, "Button",
             BS_AUTOCHECKBOX | WS_TABSTOP, 24, 220, 260, 10
+    CONTROL "Start shaping automatically", IDC_OPT_AUTO_START, "Button",
+            BS_AUTOCHECKBOX | WS_TABSTOP, 24, 236, 260, 10
 
     GROUPBOX "File Paths", IDC_OPT_GRP_FILE_PATHS, 16, 254, 388, 84
     LTEXT "Config folder:", IDC_OPT_LBL_CONFIG_FOLDER, 24, 270, 70, 10

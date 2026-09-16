@@ -130,6 +130,7 @@
 #define IDC_OPT_TABS                3139
 #define IDC_OPT_QOS_DESC            3140
 #define IDC_OPT_NIC_ALL             3141
+#define IDC_OPT_AUTO_START          3142
 
 // "Specify process" input dialog
 #define IDD_SPECIFY_PROC        105

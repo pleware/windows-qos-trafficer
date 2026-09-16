@@ -94,7 +94,7 @@ static const int g_opt_tab_general[] = {
     IDC_OPT_UPDATE_TYPE, IDC_OPT_UPDATE_TYPE + 1,
     IDC_OPT_LBL_COOLDOWN, IDC_OPT_UPDATE_COOLDOWN, IDC_OPT_LBL_MS,
     IDC_OPT_GRP_LANGUAGE, IDC_OPT_LBL_LANGUAGE, IDC_OPT_LANGUAGE,
-    IDC_OPT_GRP_BEHAVIOR, IDC_OPT_MINIMIZE_TRAY, IDC_OPT_SAVE_SETTINGS, IDC_OPT_SAVE_STICKY_SETTINGS,
+    IDC_OPT_GRP_BEHAVIOR, IDC_OPT_MINIMIZE_TRAY, IDC_OPT_SAVE_SETTINGS, IDC_OPT_SAVE_STICKY_SETTINGS, IDC_OPT_AUTO_START,
     IDC_OPT_GRP_FILE_PATHS, IDC_OPT_LBL_CONFIG_FOLDER, IDC_OPT_CONFIG_DIR, IDC_OPT_CONFIG_DIR_BROWSE,
     IDC_OPT_LBL_CONFIG_HINT, IDC_OPT_LBL_SNAPSHOT_FOLDER, IDC_OPT_SNAPSHOT_DIR, IDC_OPT_SNAPSHOT_DIR_BROWSE,
     IDC_OPT_LBL_SNAPSHOT_HINT,
@@ -162,6 +162,7 @@ void RefreshOptionsDlgStrings(HWND hDlg) {
     SetDlgItemTextW(hDlg, IDC_OPT_MINIMIZE_TRAY, T(GUI_RC_OPT_CHK_MINIMIZE_TRAY));
     SetDlgItemTextW(hDlg, IDC_OPT_SAVE_SETTINGS, T(GUI_RC_OPT_CHK_SAVE_SETTINGS));
     SetDlgItemTextW(hDlg, IDC_OPT_SAVE_STICKY_SETTINGS, T(GUI_RC_OPT_CHK_SAVE_STICKY));
+    SetDlgItemTextW(hDlg, IDC_OPT_AUTO_START, T(GUI_RC_OPT_CHK_AUTO_START));
     SetDlgItemTextW(hDlg, IDC_OPT_FAIR_SHARE, T(GUI_RC_OPT_CHK_FAIR_SHARE));
     SetDlgItemTextW(hDlg, IDC_OPT_GRP_FILE_PATHS, T(GUI_RC_OPT_GRP_FILE_PATHS));
     SetDlgItemTextW(hDlg, IDC_OPT_LBL_CONFIG_FOLDER, T(GUI_RC_OPT_LBL_CONFIG_FOLDER));
@@ -376,6 +377,10 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
         // Save sticky settings to config file
         CheckDlgButton(hDlg, IDC_OPT_SAVE_STICKY_SETTINGS,
                       g_app.options.save_sticky_settings ? BST_CHECKED : BST_UNCHECKED);
+
+        // Auto-start shaping on launch
+        CheckDlgButton(hDlg, IDC_OPT_AUTO_START,
+                      g_app.options.auto_start ? BST_CHECKED : BST_UNCHECKED);
 
         // Fair-share QoS
         CheckDlgButton(hDlg, IDC_OPT_FAIR_SHARE,
@@ -652,6 +657,9 @@ INT_PTR CALLBACK OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lPara
 
             g_app.options.all_nics =
                 IsDlgButtonChecked(hDlg, IDC_OPT_NIC_ALL) == BST_CHECKED;
+
+            g_app.options.auto_start =
+                IsDlgButtonChecked(hDlg, IDC_OPT_AUTO_START) == BST_CHECKED;
 
             // Build the selected-NICs string BEFORE saving, so the current
             // selection is persisted by the Settings_Save call below.

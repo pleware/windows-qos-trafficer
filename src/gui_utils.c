@@ -1606,6 +1606,9 @@ void Settings_Save(void) {
     WritePrivateProfileStringW(S, L"FairShare",
                                g_app.options.qos_fair_share ? L"1" : L"0", auth_path);
 
+    WritePrivateProfileStringW(S, L"AutoStart",
+                               g_app.options.auto_start ? L"1" : L"0", auth_path);
+
     swprintf(buf, 512, L"%d", (int)g_app.current_unit);
     WritePrivateProfileStringW(S, L"DisplayUnit", buf, auth_path);
 
@@ -1795,6 +1798,9 @@ void Settings_Load(void) {
 
     GetPrivateProfileStringW(S, L"FairShare", L"1", buf, 2, path);
     g_app.options.qos_fair_share = (buf[0] != L'0');
+
+    GetPrivateProfileStringW(S, L"AutoStart", L"1", buf, 2, path);
+    g_app.options.auto_start = (buf[0] != L'0');
 
     GetPrivateProfileStringW(S, L"DisplayUnit", L"-1", buf, 4, path);
     {
@@ -2876,6 +2882,7 @@ LRESULT onCreate(HWND hWnd) {
     g_app.options.save_settings = true;
     g_app.options.save_sticky_settings = false;
     g_app.options.qos_fair_share = true;
+    g_app.options.auto_start = true;
 
     g_app.freq_idx = FREQ_DEFAULT_IDX;    // Default: Normal (2s)
     g_app.proc_filter = PROC_FILTER_ALL;  // Default: Show All
@@ -2948,9 +2955,11 @@ LRESULT onCreate(HWND hWnd) {
     RefreshProcessList();
     AutoSizeProcessListColumns();
 
-    // Auto-start the shaper when a NIC is already configured: the app launches
-    // with Windows, sits in the tray, and shapes traffic without manual input.
-    if (g_app.options.selected_nics[0] != L'\0') {
+    // Auto-start the shaper when enabled and an interface is configured: the
+    // app launches with Windows, sits in the tray, and shapes traffic without
+    // the user having to click Start.
+    if (g_app.options.auto_start &&
+        (g_app.options.all_nics || g_app.options.selected_nics[0] != L'\0')) {
         StartShaper();
     }
 
