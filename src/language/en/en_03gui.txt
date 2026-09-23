@@ -64,7 +64,7 @@
 "No network interface selected.\n\n"
 "Please go to View > Options and select at least one network interface.",
 "Failed to create shaper instance",
-"Failed to start shaper: %s",
+"Failed to start shaper: %hs",
 "\r\n*** QUOTA EXHAUSTED PROCESSES ***\r\n",
 " (IN)",
 " (OUT)",
@@ -92,7 +92,7 @@
 "Stopped",
 "Configuration reloaded",
 "Configuration reloaded (fallback)",
-"Reload failed: %s",
+"Reload failed: %hs",
 "Reload Error",
 
 "Maximum total inbound bandwidth across all processes combined.\n"
@@ -153,7 +153,7 @@
 "Save the snapshots from statistics to this location,\n"
 "instead of the same directory as the EXE file itself.",
 "Change the language of the program.",
-"Failed to reload config: %s",
+"Failed to reload config: %hs",
 "Select folder for the config file (WindowsQoSTrafficer.cfg):",
 "Select folder for CSV snapshot exports:",
 "Data In",

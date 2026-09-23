@@ -847,7 +847,7 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     /*GUI_OPT_NO_NIC_MSG*/ L"No network interface selected.\n\n"
     L"Please go to View > Options and select at least one network interface.",
     /*GUI_ERR_SHAPER_ALLOC*/ L"Failed to create shaper instance",
-    /*GUI_ERR_SHAPER_START*/ L"Failed to start shaper: %s",
+    /*GUI_ERR_SHAPER_START*/ L"Failed to start shaper: %hs",
     /*GUI_STATS_QUOTA_HEADER*/ L"\r\n*** QUOTA EXHAUSTED PROCESSES ***\r\n",
     /*GUI_STATS_QUOTA_IN_SUFFIX*/ L" (IN)",
     /*GUI_STATS_QUOTA_OUT_SUFFIX*/ L" (OUT)",
@@ -875,7 +875,7 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     /*GUI_STATUS_STOPPED*/ L"Stopped",
     /*GUI_STATUS_RELOADED*/ L"Configuration reloaded",
     /*GUI_STATUS_RELOADED_F*/ L"Configuration reloaded (fallback)",
-    /*GUI_RELOAD_FAILED*/ L"Reload failed: %s",
+    /*GUI_RELOAD_FAILED*/ L"Reload failed: %hs",
     /*GUI_RELOAD_ERROR*/ L"Reload Error",
     /*GUI_TIP_DL_GLOBAL*/ L"Maximum total inbound bandwidth across all processes combined.\n"
     L"0 = no global limit (per-process limits still apply).",
@@ -935,7 +935,7 @@ const wchar_t * const lang_gui_en[_STR_COUNT] = {
     /*GUI_TIP_SNAPSHOT_DIR*/ L"Save the snapshots from statistics to this location,\n"
     L"instead of the same directory as the EXE file itself.",
     /*GUI_TIP_LANGUAGE*/ L"Change the language of the program.",
-    /*GUI_ERR_RELOAD_FAIL*/ L"Failed to reload config: %s",
+    /*GUI_ERR_RELOAD_FAIL*/ L"Failed to reload config: %hs",
     /*GUI_STATS_FOLDER_CONF*/ L"Select folder for the config file (WindowsQoSTrafficer.cfg):",
     /*GUI_STATS_FOLDER_PROMPT*/ L"Select folder for CSV snapshot exports:",
     /*GUI_STATS_DATA_IN*/ L"Data In",
@@ -1933,7 +1933,7 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     /*GUI_OPT_NO_NIC_MSG*/ L"Nincs hálózati interfész kiválasztva.\n\n"
     L"Kérlek menj a Nézet > Beállítások menübe és válassz ki legalább egy hálózati interfészt.",
     /*GUI_ERR_SHAPER_ALLOC*/ L"Nem sikerült a korlátozó példány létrehozása",
-    /*GUI_ERR_SHAPER_START*/ L"Nem sikerült a korlátozó elindítása: %s",
+    /*GUI_ERR_SHAPER_START*/ L"Nem sikerült a korlátozó elindítása: %hs",
     /*GUI_STATS_QUOTA_HEADER*/ L"\r\n*** KVÓTÁT ELÉRŐ FOLYAMATOK ***\r\n",
     /*GUI_STATS_QUOTA_IN_SUFFIX*/ L" (BE)",
     /*GUI_STATS_QUOTA_OUT_SUFFIX*/ L" (KI)",
@@ -1961,7 +1961,7 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     /*GUI_STATUS_STOPPED*/ L"Leállt",
     /*GUI_STATUS_RELOADED*/ L"A konfiguráció újratöltve",
     /*GUI_STATUS_RELOADED_F*/ L"A (tartalék) konfiguráció újratöltve",
-    /*GUI_RELOAD_FAILED*/ L"Újratöltés sikertelen: %s",
+    /*GUI_RELOAD_FAILED*/ L"Újratöltés sikertelen: %hs",
     /*GUI_RELOAD_ERROR*/ L"Újratöltési hiba",
     /*GUI_TIP_DL_GLOBAL*/ L"A legnagyobb beérkező sávszélesség minden folyamat számára.\n"
     L"0 = nincs globális korlát (a folyamatszintű korlátozások érvényben maradnak).",
@@ -2025,7 +2025,7 @@ const wchar_t * const lang_gui_hu[_STR_COUNT] = {
     /*GUI_TIP_SNAPSHOT_DIR*/ L"A statisztikai pillanatképeket erre a helyre mentse el,\n"
     L"az EXE fájllal megegyező könyvtár helyett.",
     /*GUI_TIP_LANGUAGE*/ L"Változtasd meg a program nyelvét.",
-    /*GUI_ERR_RELOAD_FAIL*/ L"A konfig újratöltése sikertelen: %s",
+    /*GUI_ERR_RELOAD_FAIL*/ L"A konfig újratöltése sikertelen: %hs",
     /*GUI_STATS_FOLDER_CONF*/ L"Válassz könyvtárat a konfig fájlnak (WindowsQoSTrafficer.cfg):",
     /*GUI_STATS_FOLDER_PROMPT*/ L"Válassz könyvtárat a CSV pillanatkép mentéséhez:",
     /*GUI_STATS_DATA_IN*/ L"Bemenő Adat",
@@ -3023,7 +3023,7 @@ const wchar_t * const lang_gui_pl[_STR_COUNT] = {
     /*GUI_OPT_NO_NIC_MSG*/ L"Nie wybrano interfejsu sieciowego.\n\n"
     L"Przejdź do Widok > Opcje i wybierz co najmniej jeden interfejs sieciowy.",
     /*GUI_ERR_SHAPER_ALLOC*/ L"Nie udało się utworzyć instancji shapera",
-    /*GUI_ERR_SHAPER_START*/ L"Nie udało się uruchomić shapera: %s",
+    /*GUI_ERR_SHAPER_START*/ L"Nie udało się uruchomić shapera: %hs",
     /*GUI_STATS_QUOTA_HEADER*/ L"\r\n*** PROCESY Z WYCZERPANYM LIMITEM ***\r\n",
     /*GUI_STATS_QUOTA_IN_SUFFIX*/ L" (IN)",
     /*GUI_STATS_QUOTA_OUT_SUFFIX*/ L" (OUT)",
@@ -3051,7 +3051,7 @@ const wchar_t * const lang_gui_pl[_STR_COUNT] = {
     /*GUI_STATUS_STOPPED*/ L"Zatrzymany",
     /*GUI_STATUS_RELOADED*/ L"Konfiguracja przeładowana",
     /*GUI_STATUS_RELOADED_F*/ L"Konfiguracja przeładowana (fallback)",
-    /*GUI_RELOAD_FAILED*/ L"Przeładowanie nie powiodło się: %s",
+    /*GUI_RELOAD_FAILED*/ L"Przeładowanie nie powiodło się: %hs",
     /*GUI_RELOAD_ERROR*/ L"Błąd przeładowania",
     /*GUI_TIP_DL_GLOBAL*/ L"Maksymalna łączna przepustowość przychodząca dla wszystkich procesów.\n"
     L"0 = brak limitu globalnego (limity per-proces nadal obowiązują).",
@@ -3111,7 +3111,7 @@ const wchar_t * const lang_gui_pl[_STR_COUNT] = {
     /*GUI_TIP_SNAPSHOT_DIR*/ L"Zapisuj migawki ze statystyk w tej lokalizacji,\n"
     L"zamiast w tym samym katalogu co plik EXE.",
     /*GUI_TIP_LANGUAGE*/ L"Zmień język programu.",
-    /*GUI_ERR_RELOAD_FAIL*/ L"Nie udało się przeładować konfiguracji: %s",
+    /*GUI_ERR_RELOAD_FAIL*/ L"Nie udało się przeładować konfiguracji: %hs",
     /*GUI_STATS_FOLDER_CONF*/ L"Wybierz folder pliku konfiguracyjnego (WindowsQoSTrafficer.cfg):",
     /*GUI_STATS_FOLDER_PROMPT*/ L"Wybierz folder eksportu migawek CSV:",
     /*GUI_STATS_DATA_IN*/ L"Dane wejściowe",

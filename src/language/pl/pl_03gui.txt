@@ -64,7 +64,7 @@
 "Nie wybrano interfejsu sieciowego.\n\n"
 "Przejdź do Widok > Opcje i wybierz co najmniej jeden interfejs sieciowy.",
 "Nie udało się utworzyć instancji shapera",
-"Nie udało się uruchomić shapera: %s",
+"Nie udało się uruchomić shapera: %hs",
 "\r\n*** PROCESY Z WYCZERPANYM LIMITEM ***\r\n",
 " (IN)",
 " (OUT)",
@@ -92,7 +92,7 @@
 "Zatrzymany",
 "Konfiguracja przeładowana",
 "Konfiguracja przeładowana (fallback)",
-"Przeładowanie nie powiodło się: %s",
+"Przeładowanie nie powiodło się: %hs",
 "Błąd przeładowania",
 
 "Maksymalna łączna przepustowość przychodząca dla wszystkich procesów.\n"
@@ -153,7 +153,7 @@
 "Zapisuj migawki ze statystyk w tej lokalizacji,\n"
 "zamiast w tym samym katalogu co plik EXE.",
 "Zmień język programu.",
-"Nie udało się przeładować konfiguracji: %s",
+"Nie udało się przeładować konfiguracji: %hs",
 "Wybierz folder pliku konfiguracyjnego (WindowsQoSTrafficer.cfg):",
 "Wybierz folder eksportu migawek CSV:",
 "Dane wejściowe",

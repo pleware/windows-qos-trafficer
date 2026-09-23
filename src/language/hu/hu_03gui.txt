@@ -64,7 +64,7 @@
 "Nincs hálózati interfész kiválasztva.\n\n"
 "Kérlek menj a Nézet > Beállítások menübe és válassz ki legalább egy hálózati interfészt.",
 "Nem sikerült a korlátozó példány létrehozása",
-"Nem sikerült a korlátozó elindítása: %s",
+"Nem sikerült a korlátozó elindítása: %hs",
 "\r\n*** KVÓTÁT ELÉRŐ FOLYAMATOK ***\r\n",
 " (BE)",
 " (KI)",
@@ -92,7 +92,7 @@
 "Leállt",
 "A konfiguráció újratöltve",
 "A (tartalék) konfiguráció újratöltve",
-"Újratöltés sikertelen: %s",
+"Újratöltés sikertelen: %hs",
 "Újratöltési hiba",
 
 "A legnagyobb beérkező sávszélesség minden folyamat számára.\n"
@@ -157,7 +157,7 @@
 "A statisztikai pillanatképeket erre a helyre mentse el,\n"
 "az EXE fájllal megegyező könyvtár helyett.",
 "Változtasd meg a program nyelvét.",
-"A konfig újratöltése sikertelen: %s",
+"A konfig újratöltése sikertelen: %hs",
 "Válassz könyvtárat a konfig fájlnak (WindowsQoSTrafficer.cfg):",
 "Válassz könyvtárat a CSV pillanatkép mentéséhez:",
 "Bemenő Adat",
